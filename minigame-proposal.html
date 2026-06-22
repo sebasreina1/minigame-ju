@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quest for Juliette</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: monospace;
+    }
+
+    canvas {
+      border: 2px solid #fff;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="c" width="320" height="240"></canvas>
+
+<script>
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+
+  // Player starting position (in pixels)
+  const player = { x: 32, y: 32, size: 16, speed: 4 };
+
+  // Track which keys are held
+  const keys = {};
+  window.addEventListener('keydown', e => keys[e.key] = true);
+  window.addEventListener('keyup',   e => keys[e.key] = false);
+
+  // Simple game loop
+  function loop() {
+    // Move player
+    if (keys['ArrowUp']    || keys['w']) player.y -= player.speed;
+    if (keys['ArrowDown']  || keys['s']) player.y += player.speed;
+    if (keys['ArrowLeft']  || keys['a']) player.x -= player.speed;
+    if (keys['ArrowRight'] || keys['d']) player.x += player.speed;
+
+    // Draw background
+    ctx.fillStyle = '#1a3a1a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw player (yellow square for now)
+    ctx.fillStyle = '#f0d050';
+    ctx.fillRect(player.x, player.y, player.size, player.size);
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+</script>
+
+</body>
+</html>
