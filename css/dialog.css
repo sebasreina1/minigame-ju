@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════════════
+   dialog.css
+   The letter/story popup box that appears during gameplay.
+   Edit here to change its size, position, or text style.
+════════════════════════════════════════════════════ */
+
+#dialog-box {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: var(--dialog-bg);
+  border: 3px solid var(--dialog-border);
+  color: var(--dialog-text);
+
+  padding: 16px 22px;
+  max-width: 440px;
+  width: 92%;
+
+  font-family: var(--font-game);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+
+  z-index: 10;
+
+  /* Use display:flex so button always sits below text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Letter title (e.g. "Letter #1 — The Beginning") */
+#dialog-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dialog-title);
+}
+
+/* Body text of the letter — \n becomes <br> via dialog.js */
+#dialog-text {
+  white-space: pre-line;
+}
+
+/* Continue button inside dialog */
+#dialog-close {
+  padding: 6px 22px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-game);
+  font-weight: bold;
+}
+
+#dialog-close:hover {
+  background: var(--color-gold);
+}

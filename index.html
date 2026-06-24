@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quest for Juliette 💛</title>
+
+  <!-- ─── Stylesheets (edit each file for different parts of the UI) ─── -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/hud.css" />
+  <link rel="stylesheet" href="css/dialog.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       START SCREEN
+       Edit text in config/gameConfig.js → SCREENS.start
+  ════════════════════════════════════════════════════════════ -->
+  <div id="start-screen" class="screen">
+    <h1 id="start-title">✦ QUEST FOR JULIETTE ✦</h1>
+    <p id="start-subtitle">Arrow keys or WASD to move · Space / Z to attack</p>
+    <p id="start-hint">Find all letters · Defeat the boss · Answer the question</p>
+    <button id="start-btn">START</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       GAME CANVAS
+       All pixel art is drawn here via Canvas API
+       (see src/game/renderer.js for drawing functions)
+  ════════════════════════════════════════════════════════════ -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HUD (Heads-Up Display)
+       Hearts, key indicators, etc.
+       Styled in css/hud.css
+  ════════════════════════════════════════════════════════════ -->
+  <div id="hud" class="hidden">
+    <div id="hp-bar"></div>
+    <div id="controls-hint">SPACE / Z → Attack</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DIALOG / MESSAGE BOX
+       Used for letters and story messages
+       Text is set in src/game/dialog.js
+       Styled in css/dialog.css
+  ════════════════════════════════════════════════════════════ -->
+  <div id="dialog-box" class="hidden">
+    <div id="dialog-title"></div>
+    <div id="dialog-text"></div>
+    <button id="dialog-close">Continue ▶</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       END SCREEN (Proposal)
+       Edit text in config/gameConfig.js → SCREENS.end
+       Styled in css/screens.css
+  ════════════════════════════════════════════════════════════ -->
+  <div id="end-screen" class="screen hidden">
+    <h2 id="end-title"></h2>
+    <p id="end-message"></p>
+    <div id="end-buttons"></div>
+  </div>
+
+  <!-- ─── Load game modules in dependency order ─── -->
+  <script src="src/config/gameConfig.js"></script>
+  <script src="src/game/renderer.js"></script>
+  <script src="src/game/sprites.js"></script>
+  <script src="src/game/dialog.js"></script>
+  <script src="src/game/entities.js"></script>
+  <script src="src/game/map.js"></script>
+  <script src="src/game/input.js"></script>
+  <script src="src/game/hud.js"></script>
+  <script src="src/game/screens.js"></script>
+  <script src="src/game/main.js"></script>
+
+</body>
+</html>

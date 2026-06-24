@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════════════════
+   screens.css
+   Start screen and End (proposal) screen styles.
+   Edit here to change layout, font sizes, button look.
+════════════════════════════════════════════════════ */
+
+/* ─── Shared screen overlay (start + end) ─── */
+.screen {
+  position: absolute;
+  inset: 0;                         /* fills 100% width + height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #111111;
+  color: var(--color-white);
+  font-family: var(--font-game);
+  z-index: 20;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ─── Start Screen ─── */
+#start-title {
+  font-size: 24px;
+  color: var(--color-gold);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+#start-subtitle {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-bottom: 6px;
+}
+
+#start-hint {
+  font-size: 11px;
+  color: #777777;
+  margin-bottom: 32px;
+}
+
+/* ─── Shared button style ─── */
+#start-btn,
+#dialog-close,
+#yes-btn,
+#no-btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  font-family: var(--font-game);
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: background 0.15s;
+}
+
+#start-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+/* ─── End Screen ─── */
+#end-screen {
+  background: rgba(0, 0, 0, 0.94);  /* slightly transparent so canvas shows behind */
+  z-index: 30;
+}
+
+#end-title {
+  font-size: 22px;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+
+#end-message {
+  font-size: 14px;
+  line-height: 1.9;
+  max-width: 360px;
+  color: #eeeeee;
+  margin-bottom: 28px;
+  white-space: pre-line;    /* respects \n line breaks in config */
+}
+
+/* ─── Yes / No buttons ─── */
+#yes-btn {
+  background: #4caf50;
+  color: #ffffff;
+  margin: 6px;
+}
+
+#yes-btn:hover {
+  background: #66bb6a;
+}
+
+#no-btn {
+  background: #555555;
+  color: #ffffff;
+  margin: 6px;
+  transition: all 0.1s;     /* used for the "running away" effect in screens.js */
+  position: relative;
+}

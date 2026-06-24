@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════
+   reset.css
+   Base reset and shared variables.
+   Edit CSS variables here to retheme the whole game UI.
+════════════════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* Keeps pixel art sharp — never remove this */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ─── CSS Custom Properties (global theme tokens) ─── */
+:root {
+  /* Fonts */
+  --font-game: 'Courier New', Courier, monospace;
+
+  /* UI Colors */
+  --color-bg:         #111111;
+  --color-gold:       #f0d050;    /* Used for titles, accents */
+  --color-white:      #ffffff;
+  --color-black:      #000000;
+
+  /* Dialog box */
+  --dialog-bg:        #000000;
+  --dialog-border:    #ffffff;
+  --dialog-text:      #ffffff;
+  --dialog-title:     #f0d050;
+
+  /* HUD hearts */
+  --heart-full:       #e33333;
+  --heart-empty:      #440000;
+
+  /* Button */
+  --btn-bg:           #f0d050;
+  --btn-color:        #000000;
+  --btn-hover-bg:     #ffffff;
+}
+
+body {
+  background: var(--color-bg);
+  font-family: var(--font-game);
+  overflow: hidden;     /* No scrollbars — game fills viewport */
+}
+
+/* Utility: hide any element */
+.hidden {
+  display: none !important;
+}
