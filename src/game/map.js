@@ -86,6 +86,7 @@ const GameMap = (() => {
     TILE,
     getTile,
     isSolid,
+    isTileSolid,
     drawMap,
   };
 })();

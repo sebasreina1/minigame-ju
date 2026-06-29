@@ -35,6 +35,8 @@ const Screens = (() => {
   function initStartScreen(onStart) {
     startBtn.addEventListener('click', () => {
       startScreen.classList.add('hidden');
+      // Return focus to the document so keyboard events fire immediately
+      document.body.focus();
       onStart();
     });
   }
@@ -67,8 +69,17 @@ const Screens = (() => {
     noBtn.id          = 'no-btn';
     noBtn.textContent = S.end.noLabel;
     noBtn.addEventListener('click', () => {
+      noCount++;
       noBtn.style.left = (Math.random() * 260) + 'px';
       noBtn.style.top  = (Math.random() * 80)  + 'px';
+      
+      if (noCount === 3) {
+          endMessage.textContent = "It won't be as easy as you thought...";
+      } else if (noCount === 5) {
+          endMessage.textContent = "Bruh, come on 💀";
+      } else if (noCount === 8) {
+          endMessage.textContent = "this has to be a joke lmao";
+      }
     });
 
     endButtons.appendChild(yesBtn);

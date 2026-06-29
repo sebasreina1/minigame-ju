@@ -86,6 +86,15 @@ I just know I want more of these moments. More laughing, more talking, more of w
 
 One more chest to go... 🗝️`,
     },
+    {
+      title: "Letter #3 — The Beginning",
+      text:
+`Dear Juliette,
+
+If you're reading this, it means our little adventurer found the first chest! Before I say anything else... I just want you to know that the day I met you, something shifted.
+
+Keep going. There's more to find. 💛`,
+    },
   ],
 
   /* ─────────────────────────────────────────────
@@ -102,6 +111,8 @@ One more chest to go... 🗝️`,
     { x: 16, y: 10, type: "letter", letterIdx: 2 },
     { x: 10, y: 5,  type: "boss"  },   // boss spawn marker (no chest drawn here)
     { x: 10, y: 2,  type: "final" },   // the golden final chest
+    { x: 10, y: 2,  type: "letter", letterIdx: 3 },
+
   ],
 
   /* ─────────────────────────────────────────────
