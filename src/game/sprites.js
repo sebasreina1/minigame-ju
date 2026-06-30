@@ -171,9 +171,12 @@ const Sprites = (() => {
     ctx.fillRect(bx + 6,  by + bh - 10, bw - 12, 10);  // bottom (narrow)
 
     // Body outline
+    // Body outline — traces the tapered shape instead of one big rectangle
     ctx.strokeStyle = C.bossOutline;
     ctx.lineWidth = 2;
-    ctx.strokeRect(bx + 2, by, bw - 4, bh);
+    ctx.strokeRect(bx + 6, by,           bw - 12, 6);          // top section outline
+    ctx.strokeRect(bx + 2, by + 6,       bw - 4,  bh - 16);     // middle section outline
+    ctx.strokeRect(bx + 6, by + bh - 10, bw - 12, 10);          // bottom section outline
 
     // ── Red hourglass marking on the abdomen ──
     ctx.fillStyle = flashWhite ? '#ffffff' : C.bossRed;
