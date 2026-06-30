@@ -79,10 +79,18 @@ function checkChestInteraction() {
     { x: p.x + 1, y: p.y     },
     { x: p.x,     y: p.y     },
   ];
+  
   for (const ch of Entities.chests) {
     if (!nearby.some(pos => pos.x === ch.x && pos.y === ch.y)) continue;
     if (ch.type === 'letter' && !ch.opened) {
-      openLetterChest(ch);
+      if (ch.order === state.lettersFound + 1) {
+          openLetterChest(ch);
+        } else {
+          Dialog.show(
+            'Not yet!',
+            'This chest wants to wait its turn...\nFind the earlier letters first.'
+          );
+        }
       return;
     }
     if (ch.type === 'boss' && ch.locked) {

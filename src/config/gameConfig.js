@@ -43,13 +43,9 @@ const CONFIG = {
   ──────────────────────────────────────────────── */
   LETTERS: [
     {
-      title: "Letter #1 — The Beginning",
+      title: "Chest #1",
       text:
-`Dear Juliette,
-
-If you're reading this, it means our little adventurer found the first chest! Before I say anything else... I just want you to know that the day I met you, something shifted.
-
-Keep going. There's more to find. 💛`,
+`Hey, `,
     },
     {
       title: "Letter #2 — The Feeling",
@@ -93,14 +89,12 @@ Keep going. There's more to find. 💛`,
        "final"   → shows the proposal (locked until boss defeated)
   ──────────────────────────────────────────────── */
   CHESTS: [
-    { x: 4,  y: 11,  type: "letter", letterIdx: 0 },
-    { x: 14, y: 7,  type: "letter", letterIdx: 1 },
-    { x: 16, y: 10, type: "letter", letterIdx: 2 },
-    { x: 10, y: 5,  type: "boss"  },   // boss spawn marker (no chest drawn here)
-    { x: 10, y: 2,  type: "final" },   // the golden final chest
-    { x: 10, y: 2,  type: "letter", letterIdx: 3 },
-
-  ],
+  { x: 4,  y: 11, type: "letter", letterIdx: 0, order: 1 },
+  { x: 14, y: 7,  type: "letter", letterIdx: 1, order: 2 },
+  { x: 16, y: 10, type: "letter", letterIdx: 2, order: 3 },
+  { x: 10, y: 5,  type: "boss"  },
+  { x: 10, y: 2,  type: "final" },
+],
 
   /* ─────────────────────────────────────────────
      MAP DATA
