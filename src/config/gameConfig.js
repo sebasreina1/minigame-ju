@@ -1,16 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════════
-   gameConfig.js  —  THE MAIN SETTINGS FILE
-   ───────────────────────────────────────────────────────────────────
-   This is your single source of truth.
-   Edit almost EVERYTHING here:
-     • Canvas / tile size
-     • Player stats (HP, speed)
-     • Letters content
-     • Screen texts (start, end, proposal question)
-     • Map layout
-     • Boss stats
-     • Colors for pixel art
-   ═══════════════════════════════════════════════════════════════════ */
 
 const CONFIG = {
 
@@ -42,7 +29,7 @@ const CONFIG = {
     startX: 10,         // Tile column where boss spawns
     startY: 5,          // Tile row where boss spawns
     maxHP: 5,           // Hits to kill boss
-    moveEveryNFrames: 60,  // How often boss takes a step (lower = faster)
+    moveEveryNFrames: 20,  // How often boss takes a step (lower = faster)
     hitFlashDuration: 10,  // Frames boss flashes white when hit
     playerHitCooldown: 40, // Frames of invincibility after boss hits player
     attackRange: 2,     // Tile radius in which player's sword can hit boss
@@ -106,7 +93,7 @@ Keep going. There's more to find. 💛`,
        "final"   → shows the proposal (locked until boss defeated)
   ──────────────────────────────────────────────── */
   CHESTS: [
-    { x: 3,  y: 3,  type: "letter", letterIdx: 0 },
+    { x: 4,  y: 11,  type: "letter", letterIdx: 0 },
     { x: 14, y: 7,  type: "letter", letterIdx: 1 },
     { x: 16, y: 10, type: "letter", letterIdx: 2 },
     { x: 10, y: 5,  type: "boss"  },   // boss spawn marker (no chest drawn here)
@@ -249,9 +236,7 @@ Your final answer awaits!`,
       title: 'You Died!',
       text:
 `You were defeated by the Guardian...
-But a fairy revived you!
-
-(Respawned with 3 hearts)`,
+But a fairy revived you!`,
     },
     end: {
       title:   '❤️ Final Question ❤️',

@@ -145,8 +145,7 @@ function moveBossTowardPlayer() {
   let nx = b.x, ny = b.y;
   if (Math.abs(dx) >= Math.abs(dy)) nx += Math.sign(dx);
   else                               ny += Math.sign(dy);
-  if (nx >= 1 && nx < CONFIG.COLS - 1 && ny >= 1 && ny < CONFIG.ROWS - 1
-      && !GameMap.isTileSolid(nx, ny)) {
+  if (nx >= 1 && nx < CONFIG.COLS - 1 && ny >= 1 && ny < CONFIG.ROWS - 1) {
     b.x = nx;
     b.y = ny;
   }

@@ -262,12 +262,47 @@ const Sprites = (() => {
 
 
     // ── Sword swing (only visible when attacking) ──
+    // ── Sword swing — always swings left to right, with a pointed tip ──
+    // ── Sword swing — only visible when facing left/right, with a pointed tip ──
+// ── Gun — only visible when facing left/right ──
     if (swordActive) {
-      ctx.fillStyle = C.swordBlade;
-      if      (dir === 'right') ctx.fillRect(px + T - 2, py + 10, 5,  20);
-      else if (dir === 'left')  ctx.fillRect(px - 10,    py + 10, 5,  20);
-      else if (dir === 'down')  ctx.fillRect(px + T - 4, py + 14, 18, 5);
-      else if (dir === 'up')    ctx.fillRect(px - 14,    py + 14, 18, 5);
+      ctx.fillStyle = '#555555';   // gun barrel/body — dark grey
+
+      if (dir === 'right') {
+        // Barrel
+        ctx.fillRect(px + T - 2, py + 14, 14, 4);
+        // Grip (angled down from the back of the barrel)
+        ctx.fillRect(px + T + 2, py + 17, 4, 7);
+        // Trigger guard accent
+        ctx.fillStyle = '#333333';
+        ctx.fillRect(px + T + 1, py + 17, 2, 2);
+
+      } else if (dir === 'up') {
+        // Barrel
+        ctx.fillRect(px + T - 2, py + 14, 14, 4);
+        // Grip (angled down from the back of the barrel)
+        ctx.fillRect(px + T + 2, py + 17, 4, 7);
+        // Trigger guard accent
+        ctx.fillStyle = '#333333';
+        ctx.fillRect(px + T + 1, py + 17, 2, 2);
+
+      } else if (dir === 'down') {
+        // Barrel
+        ctx.fillRect(px - 12, py + 14, 14, 4);
+        // Grip
+        ctx.fillRect(px - 6, py + 17, 4, 7);
+        // Trigger guard accent
+        ctx.fillStyle = '#333333';
+        ctx.fillRect(px - 3, py + 17, 2, 2);
+      } else if (dir === 'left') {
+        // Barrel
+        ctx.fillRect(px - 12, py + 14, 14, 4);
+        // Grip
+        ctx.fillRect(px - 6, py + 17, 4, 7);
+        // Trigger guard accent
+        ctx.fillStyle = '#333333';
+        ctx.fillRect(px - 3, py + 17, 2, 2);
+      }
     }
 
     ctx.globalAlpha = 1;  // always reset alpha
