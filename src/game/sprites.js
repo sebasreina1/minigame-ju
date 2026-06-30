@@ -214,19 +214,7 @@ const Sprites = (() => {
     ctx.strokeRect(barX, barY, barW, 7);
   }
 
-  /* ─────────────────────────────────────────────
-     PLAYER SPRITE — Princess
-     dir: 'up' | 'down' | 'left' | 'right'
-     alpha: 0–1 (used for hit flash blinking)
-     swordActive: true when player just attacked
 
-     Layout (top to bottom):
-       - Hair (blonde, drawn behind + around head)
-       - Head (skin tone)
-       - Tiny crown on top of head
-       - Pink dress body (triangular/flared shape made of stacked rects)
-       - Tiny feet peeking out from under dress
-  ──────────────────────────────────────────────── */
   function drawPlayer(ctx, px, py, dir, alpha, swordActive) {
     ctx.globalAlpha = alpha;
 
@@ -238,7 +226,7 @@ const Sprites = (() => {
 
     // ── Head / skin ──
     ctx.fillStyle = C.playerSkin;
-    ctx.fillRect(px + 10, py + 6, 12, 11);
+    ctx.fillRect(px + 10, py + 9, 12, 11);
 
     // ── Crown (small gold points on top of head) ──
     ctx.fillStyle = '#f0d050';
@@ -268,18 +256,7 @@ const Sprites = (() => {
     ctx.fillRect(px + 10, py + 33, 4, 2);
     ctx.fillRect(px + 18, py + 33, 4, 2);
 
-    // ── Tiny French flag in hand ──
-    // Flag appears on opposite side from where player is facing
-    const flagX = (dir === 'left') ? px - 6 : px + T - 2;
-    const flagY  = py + 14;
-    ctx.fillStyle = C.flagPole;
-    ctx.fillRect(flagX, flagY, 2, 14);
-    ctx.fillStyle = C.flagBlue;
-    ctx.fillRect(flagX + 2, flagY, 4, 8);
-    ctx.fillStyle = C.flagWhite;
-    ctx.fillRect(flagX + 6, flagY, 4, 8);
-    ctx.fillStyle = C.flagRed;
-    ctx.fillRect(flagX + 10, flagY, 4, 8);
+
 
     // ── Sword swing (only visible when attacking) ──
     if (swordActive) {
