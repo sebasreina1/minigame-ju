@@ -130,45 +130,65 @@ const Sprites = (() => {
   }
 
   /* ─────────────────────────────────────────────
-     BOSS SPRITE
-     The France-flag guardian.
+     BOSS SPRITE — Spider
      px/py is the top-left of the boss's tile.
      bobOffset: a sine-wave float for floating animation.
      flashWhite: true when recently hit → paint solid white.
+
+     Layout:
+       - 8 legs (4 per side), drawn as angled rectangles
+       - Round body (abdomen) — large oval-ish shape made of stacked rects
+       - Smaller head section in front
+       - Red "hourglass" marking on the abdomen (like a black widow)
+       - Multiple small eyes
   ──────────────────────────────────────────────── */
   function drawBoss(ctx, px, py, bobOffset, flashWhite) {
-    // Boss body dimensions — 2 tiles wide, 2 tiles tall, centered
-    const bw = T * 2 - 8;
-    const bh = T * 2 - 8;
-    const bx = px - T / 2 + 4;
-    const by = py - T / 2 + 4 + bobOffset;
+    const bw = T * 2 - 8;             // overall width
+    const bh = T * 2 - 8;             // overall height
+    const bx = px - T / 2 + 4;        // left edge
+    const by = py - T / 2 + 4 + bobOffset;  // top edge (with float animation)
 
-    // France tricolor body
-    const sectionW = bw / 3;
-    ctx.fillStyle = flashWhite ? '#fff' : C.bossBlue;
-    ctx.fillRect(bx,               by, sectionW, bh);
-    ctx.fillStyle = flashWhite ? '#fff' : C.bossWhite;
-    ctx.fillRect(bx + sectionW,    by, sectionW, bh);
-    ctx.fillStyle = flashWhite ? '#fff' : C.bossRed;
-    ctx.fillRect(bx + sectionW * 2, by, sectionW, bh);
+    const bodyColor = flashWhite ? '#ffffff' : C.bossBlue;   // spider body color
+    const legColor  = flashWhite ? '#ffffff' : '#1a1a1a';    // legs are near-black
 
-    // Border
+    // ── Legs (4 per side, angled lines made of thin rects) ──
+    // Each leg is drawn as two short segments to fake a "bent" leg look
+    ctx.fillStyle = legColor;
+    for (let i = 0; i < 4; i++) {
+      const legY = by + 8 + i * 9;
+      // Left legs — angle outward to the left
+      ctx.fillRect(bx - 14, legY, 14, 3);
+      ctx.fillRect(bx - 18, legY - 4, 6, 3);
+      // Right legs — angle outward to the right
+      ctx.fillRect(bx + bw,      legY, 14, 3);
+      ctx.fillRect(bx + bw + 12, legY - 4, 6, 3);
+    }
+
+    // ── Body (abdomen) — round-ish shape using stacked rows of varying width ──
+    ctx.fillStyle = bodyColor;
+    ctx.fillRect(bx + 6,  by,      bw - 12, 6);    // top (narrow)
+    ctx.fillRect(bx + 2,  by + 6,  bw - 4,  bh - 16); // middle (wide)
+    ctx.fillRect(bx + 6,  by + bh - 10, bw - 12, 10);  // bottom (narrow)
+
+    // Body outline
     ctx.strokeStyle = C.bossOutline;
     ctx.lineWidth = 2;
-    ctx.strokeRect(bx, by, bw, bh);
+    ctx.strokeRect(bx + 2, by, bw - 4, bh);
 
-    // Angry eyebrows
+    // ── Red hourglass marking on the abdomen ──
+    ctx.fillStyle = flashWhite ? '#ffffff' : C.bossRed;
+    const midX = bx + bw / 2;
+    const midY = by + bh / 2;
+    ctx.fillRect(midX - 1, midY - 10, 2, 6);    // top triangle (simplified as a line)
+    ctx.fillRect(midX - 4, midY - 4,  8, 3);    // hourglass pinch point
+    ctx.fillRect(midX - 1, midY + 4,  2, 6);    // bottom triangle
+
+    // ── Eyes (several small dots near the top, spiders have many eyes) ──
     ctx.fillStyle = C.bossEye;
-    ctx.fillRect(bx + 6,       by + 6, 10, 3);
-    ctx.fillRect(bx + bw - 16, by + 6, 10, 3);
-
-    // Eyes
-    ctx.fillRect(bx + 8,       by + 10, 6, 7);
-    ctx.fillRect(bx + bw - 14, by + 10, 6, 7);
-
-    // Mouth
-    ctx.fillStyle = C.bossMouth;
-    ctx.fillRect(bx + 10, by + bh - 14, bw - 20, 4);
+    ctx.fillRect(bx + bw / 2 - 8, by + 4, 3, 3);
+    ctx.fillRect(bx + bw / 2 - 3, by + 2, 4, 4);   // slightly bigger center eyes
+    ctx.fillRect(bx + bw / 2 + 2, by + 2, 4, 4);
+    ctx.fillRect(bx + bw / 2 + 7, by + 4, 3, 3);
   }
 
   /**
@@ -195,42 +215,63 @@ const Sprites = (() => {
   }
 
   /* ─────────────────────────────────────────────
-     PLAYER SPRITE
+     PLAYER SPRITE — Princess
      dir: 'up' | 'down' | 'left' | 'right'
      alpha: 0–1 (used for hit flash blinking)
      swordActive: true when player just attacked
+
+     Layout (top to bottom):
+       - Hair (blonde, drawn behind + around head)
+       - Head (skin tone)
+       - Tiny crown on top of head
+       - Pink dress body (triangular/flared shape made of stacked rects)
+       - Tiny feet peeking out from under dress
   ──────────────────────────────────────────────── */
   function drawPlayer(ctx, px, py, dir, alpha, swordActive) {
     ctx.globalAlpha = alpha;
 
-    // Body / top
-    ctx.fillStyle = C.playerCloth;
-    ctx.fillRect(px + 9, py + 14, 14, 14);
-
-    // Head / skin
-    ctx.fillStyle = C.playerSkin;
-    ctx.fillRect(px + 10, py + 6, 12, 12);
-
-    // Hair (longer sides for a feminine look)
+    // ── Hair (blonde) — drawn first so head sits on top ──
     ctx.fillStyle = C.playerHair;
-    ctx.fillRect(px + 9,  py + 4,  14, 7);   // top
-    ctx.fillRect(px + 7,  py + 6,  4,  10);  // left side
-    ctx.fillRect(px + 21, py + 6,  4,  10);  // right side
+    ctx.fillRect(px + 8,  py + 3,  16, 7);   // top of head hair
+    ctx.fillRect(px + 6,  py + 5,  4,  14);  // left side — longer princess hair
+    ctx.fillRect(px + 22, py + 5,  4,  14);  // right side — longer princess hair
 
-    // Eyes
+    // ── Head / skin ──
+    ctx.fillStyle = C.playerSkin;
+    ctx.fillRect(px + 10, py + 6, 12, 11);
+
+    // ── Crown (small gold points on top of head) ──
+    ctx.fillStyle = '#f0d050';
+    ctx.fillRect(px + 11, py + 1, 2, 3);   // left point
+    ctx.fillRect(px + 15, py + 0, 2, 4);   // center point (tallest)
+    ctx.fillRect(px + 19, py + 1, 2, 3);   // right point
+    ctx.fillRect(px + 10, py + 4, 12, 2);  // crown base band
+
+    // ── Eyes ──
     ctx.fillStyle = '#333333';
     ctx.fillRect(px + 12, py + 11, 3, 3);
     ctx.fillRect(px + 17, py + 11, 3, 3);
 
-    // Legs
-    ctx.fillStyle = C.playerPants;
-    ctx.fillRect(px + 10, py + 26, 5, 6);
-    ctx.fillRect(px + 17, py + 26, 5, 6);
+    // ── Dress — pink, flares out wider at the bottom like a gown ──
+    // Upper bodice (narrow, fitted)
+    ctx.fillStyle = C.playerCloth;          // playerCloth is now pink (see CONFIG.COLORS)
+    ctx.fillRect(px + 9,  py + 17, 14, 8);
+    // Skirt — flares wider as it goes down (3 stacked rows, each wider)
+    ctx.fillRect(px + 7,  py + 25, 18, 4);
+    ctx.fillRect(px + 5,  py + 29, 22, 4);
+    // Dress trim / sparkle line near the hem
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(px + 5,  py + 31, 22, 1);
+
+    // ── Tiny feet peeking out from under the dress ──
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(px + 10, py + 33, 4, 2);
+    ctx.fillRect(px + 18, py + 33, 4, 2);
 
     // ── Tiny French flag in hand ──
     // Flag appears on opposite side from where player is facing
     const flagX = (dir === 'left') ? px - 6 : px + T - 2;
-    const flagY  = py + 10;
+    const flagY  = py + 14;
     ctx.fillStyle = C.flagPole;
     ctx.fillRect(flagX, flagY, 2, 14);
     ctx.fillStyle = C.flagBlue;
@@ -243,10 +284,10 @@ const Sprites = (() => {
     // ── Sword swing (only visible when attacking) ──
     if (swordActive) {
       ctx.fillStyle = C.swordBlade;
-      if      (dir === 'right') ctx.fillRect(px + T - 2, py + 6,  5,  20);
-      else if (dir === 'left')  ctx.fillRect(px - 10,    py + 6,  5,  20);
-      else if (dir === 'down')  ctx.fillRect(px + T - 4, py + 10, 18,  5);
-      else if (dir === 'up')    ctx.fillRect(px - 14,    py + 10, 18,  5);
+      if      (dir === 'right') ctx.fillRect(px + T - 2, py + 10, 5,  20);
+      else if (dir === 'left')  ctx.fillRect(px - 10,    py + 10, 5,  20);
+      else if (dir === 'down')  ctx.fillRect(px + T - 4, py + 14, 18, 5);
+      else if (dir === 'up')    ctx.fillRect(px - 14,    py + 14, 18, 5);
     }
 
     ctx.globalAlpha = 1;  // always reset alpha

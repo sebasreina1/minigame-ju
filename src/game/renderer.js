@@ -23,8 +23,11 @@ const Renderer = (() => {
 
   canvas.width  = W;
   canvas.height = H;
-  canvas.style.width  = '100%';   // scales to fit browser window
-  canvas.style.height = 'auto';
+  canvas.style.width  = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.maxWidth  = '100vw';
+  canvas.style.maxHeight = '100vh';
+  canvas.style.objectFit = 'contain';
 
   /**
    * Draw one complete frame.

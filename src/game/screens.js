@@ -66,6 +66,7 @@ const Screens = (() => {
     // ── NO button ──
     // Every click moves it to a random position so it can't be pressed
     const noBtn = document.createElement('button');
+    noCount = 0;
     noBtn.id          = 'no-btn';
     noBtn.textContent = S.end.noLabel;
     noBtn.addEventListener('click', () => {
@@ -79,6 +80,9 @@ const Screens = (() => {
           endMessage.textContent = "Bruh, come on 💀";
       } else if (noCount === 8) {
           endMessage.textContent = "this has to be a joke lmao";
+      }
+      else if (noCount === 14) {
+          endMessage.textContent = "😭😭😭😭😭😭";
       }
     });
 

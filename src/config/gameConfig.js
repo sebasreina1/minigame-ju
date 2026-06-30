@@ -179,11 +179,12 @@ Keep going. There's more to find. 💛`,
     bossEye:      '#000000',
     bossMouth:    '#000000',
 
-    /* Player */
+    /* Player — Princess */
     playerSkin:   '#f5d090',
-    playerHair:   '#e8c840',   // blonde
-    playerCloth:  '#4a80d0',   // top
-    playerPants:  '#3060a0',
+    playerHair:   '#edc616',   // blonde
+    playerCloth:  '#ff8fc7',   // dress (pink)
+    playerPants:  '#3060a0',   // unused now but kept for compatibility
+
 
     /* French flag the player holds */
     flagBlue:     '#0055A4',
@@ -212,9 +213,9 @@ Keep going. There's more to find. 💛`,
   ──────────────────────────────────────────────── */
   SCREENS: {
     start: {
-      title:    '✦ QUEST FOR JULIETTE ✦',
+      title:    '✦ ADVENTURE QUEST ✦',
       subtitle: 'Arrow keys or WASD to move · Space / Z to attack',
-      hint:     'Find all letters · Defeat the boss · Answer the question',
+      hint:     'Find all the keys · Defeat the boss · Claim your prize',
       button:   'START',
     },
     intro: {
@@ -223,10 +224,10 @@ Keep going. There's more to find. 💛`,
 `Arrow keys / WASD → Move
 Space / Z → Attack
 
-Find all 3 letter chests,
-then defeat the French boss!
+Find all 3 chests,
+then defeat the boss!
 
-Your answer awaits at the end. 💛`,
+Your answer awaits at the end.`,
     },
     bossLocked: {
       title: 'Locked!',
@@ -239,13 +240,13 @@ Your answer awaits at the end. 💛`,
     bossDefeated: {
       title: 'Boss Defeated! 🏆',
       text:
-`The Guardian of France has fallen!
+`The Guardian has fallen!
 
 A golden chest appeared to the north...
 Your final answer awaits!`,
     },
     playerDied: {
-      title: 'You fell!',
+      title: 'You Died!',
       text:
 `You were defeated by the Guardian...
 But a fairy revived you!
@@ -253,24 +254,28 @@ But a fairy revived you!
 (Respawned with 3 hearts)`,
     },
     end: {
-      title:   '💛 Final Question 💛',
+      title:   '❤️ Final Question ❤️',
       message:
 `Dear Juliette,
 
-You've made it to the end of the quest.
-You defeated a whole boss for this.
+I made this to prove to you that no matter how far I am from you I would 
+always try my best to impress you my love. 
+Je t'aime
 
-So... will you be my girlfriend? 🥺`,
-      yesLabel: 'Yes! 💛',
-      noLabel:  'No... 😢',
-      yesTitle:  '🎉 She Said YES! 🎉',
+And as for the last part of the quest, something that I knew from day one 
+but couldn't express it fully. I would like to ask you if you 
+
+want to be my Girlfriend?`,
+      yesLabel: 'Oui! ❤️',
+      noLabel:  'Non',
+      yesTitle:  '🎉 LETSGOOO She Said YES! 🎉',
       yesMessage:
-`I knew it! 💛
+`I knew it! 
 
-Adventure unlocked:
+Achievement unlocked:
 Being your boyfriend.
 
-— Sebastian 🥰`,
+— Sebastian 😛`,
     },
   },
 };
