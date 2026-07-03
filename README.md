@@ -1,6 +1,5 @@
-# 💛 Quest for Juliette — Developer Guide
+# ADVENTURE QUEST — Developer Guide
 
-A fully commented, easy-to-edit 8-bit browser game proposal.
 
 ---
 
