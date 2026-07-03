@@ -45,7 +45,9 @@ const CONFIG = {
     {
       title: "Chest #1",
       text:
-`Hey, `,
+`Hey, I think by now you have realized that this is not me asking you a favour to test a project, this is the thing that i told you about for the past few days
+I built every little detail while thinking about you, and as you can see is very professional looking lool. 
+Keep Opening the chests and you'll see more of this ;)`,
     },
     {
       title: "Letter #2 — The Feeling",
