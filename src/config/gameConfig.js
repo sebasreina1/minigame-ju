@@ -50,15 +50,11 @@ I built every little detail while thinking about you, and as you can see is very
 Keep Opening the chests and you'll see more of this ;)`,
     },
     {
-      title: "Letter #2 — The Feeling",
+      title: "Chest #2",
       text:
-`Dear Juliette,
-
-You know that feeling when a song comes on and it just fits perfectly? That's what being around you feels like. Easy. Right.
-
-I keep finding reasons to smile when I think about you. And honestly, that's a little dangerous. 😄
-
-— Sebastian`,
+`Ever since the beginnig when our eyes met that first time I had a feeling, something pulling me closer towards you making my soul express his love towards you,
+on which I listened and showed it to you in a form of a dance. In that moment I felt so happy to be dancing with someone as stunning as you, however. I did not express 
+it, Maybe because I didn't want to scare off someone I just met but also wanted you to look at me with the same eyes I looked at you with `,
     },
     {
       title: "Letter #3 — The Truth",
@@ -80,6 +76,17 @@ If you're reading this, it means our little adventurer found the first chest! Be
 
 Keep going. There's more to find. 💛`,
     },
+    {
+      title: "Letter #3 — The Truth",
+      text:
+`Dear Juliette,
+
+I've been trying to find the right words, but here's the truth: I don't want to overthink this.
+
+I just know I want more of these moments. More laughing, more talking, more of whatever this is between us.
+
+One more chest to go... 🗝️`,
+    },
   ],
 
   /* ─────────────────────────────────────────────
@@ -94,6 +101,8 @@ Keep going. There's more to find. 💛`,
   { x: 4,  y: 11, type: "letter", letterIdx: 0, order: 1 },
   { x: 14, y: 7,  type: "letter", letterIdx: 1, order: 2 },
   { x: 16, y: 10, type: "letter", letterIdx: 2, order: 3 },
+  { x: 17,  y: 2,  type: "letter", letterIdx: 3, order: 4 },
+
   { x: 10, y: 5,  type: "boss"  },
   { x: 10, y: 2,  type: "final" },
 ],
