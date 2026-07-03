@@ -29,10 +29,10 @@ const CONFIG = {
     startX: 10,         // Tile column where boss spawns
     startY: 5,          // Tile row where boss spawns
     maxHP: 5,           // Hits to kill boss
-    moveEveryNFrames: 20,  // How often boss takes a step (lower = faster)
+    moveEveryNFrames: 40,  // How often boss takes a step (lower = faster)
     hitFlashDuration: 10,  // Frames boss flashes white when hit
     playerHitCooldown: 40, // Frames of invincibility after boss hits player
-    attackRange: 2,     // Tile radius in which player's sword can hit boss
+    attackRange: 4,     // Tile radius in which player's sword can hit boss
   },
 
   /* ─────────────────────────────────────────────
@@ -46,15 +46,17 @@ const CONFIG = {
       title: "Chest #1",
       text:
 `Hey, I think by now you have realized that this is not me asking you a favour to test a project, this is the thing that i told you about for the past few days
+
 I built every little detail while thinking about you, and as you can see is very professional looking lool. 
+
 Keep Opening the chests and you'll see more of this ;)`,
     },
     {
       title: "Chest #2",
       text:
-`Ever since the beginnig when our eyes met that first time I had a feeling, something pulling me closer towards you making my soul express his love towards you,
-on which I listened and showed it to you in a form of a dance. In that moment I felt so happy to be dancing with someone as stunning as you, however. I did not express 
-it, Maybe because I didn't want to scare off someone I just met but also wanted you to look at me with the same eyes I looked at you with `,
+`Ever since the beginnig when our eyes met that first time I had a feeling, something pulling me closer towards you making my soul express his love towards you,on which I listened and 
+showed it to you in a form of a dance. In that moment I felt so happy to be dancing with someone as stunning as you, however. I did not express it, Maybe because I didn't want to scare
+off someone I just met but also wanted you to look at me with the same eyes I looked at you with `,
     },
     {
       title: "Chest #3",
@@ -239,9 +241,9 @@ always try my best to impress you my love.
 Je t'aime
 
 And as for the last part of the quest, something that I knew from day one 
-but couldn't express it fully. I would like to ask you if you 
+but couldn't express it fully. I would like to ask you... 
 
-want to be my Girlfriend?`,
+Do you want to be my Girlfriend?`,
       yesLabel: 'Oui! ❤️',
       noLabel:  'Non',
       yesTitle:  '🎉 LETSGOOO She Said YES! 🎉',
