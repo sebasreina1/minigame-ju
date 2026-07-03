@@ -57,24 +57,16 @@ on which I listened and showed it to you in a form of a dance. In that moment I 
 it, Maybe because I didn't want to scare off someone I just met but also wanted you to look at me with the same eyes I looked at you with `,
     },
     {
-      title: "Letter #3 — The Truth",
+      title: "Chest #3",
       text:
-`Dear Juliette,
-
-I've been trying to find the right words, but here's the truth: I don't want to overthink this.
-
-I just know I want more of these moments. More laughing, more talking, more of whatever this is between us.
-
-One more chest to go... 🗝️`,
+`All my life I thought about love in such a different way, I thought what i felt with other people was actually love, and I believed it. Until I met you
+that fire that you have and that spirit is something that draws me closer to you, the fact that we can go anywhere and no matter what, if we have eachother
+thats really all it matters.`,
     },
     {
-      title: "Letter #3 — The Beginning",
+      title: "Chest #4",
       text:
-`Dear Juliette,
-
-If you're reading this, it means our little adventurer found the first chest! Before I say anything else... I just want you to know that the day I met you, something shifted.
-
-Keep going. There's more to find. 💛`,
+``,
     },
     {
       title: "Letter #3 — The Truth",
