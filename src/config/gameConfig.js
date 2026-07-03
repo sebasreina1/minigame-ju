@@ -66,18 +66,12 @@ thats really all it matters.`,
     {
       title: "Chest #4",
       text:
-``,
-    },
-    {
-      title: "Letter #3 — The Truth",
-      text:
-`Dear Juliette,
+`I really want to with all my heart to see you everyday, to laugh together about my horrible accent and to see all the cool places that Paris has to show, to just
+sit down in a park and drink some wine with cheese and salami, talking about how crazy of a year this was, and that thanks to our patiente and determination, we made
+this possible, to live together and have a life that we can both be proud of. Thats something that I dream everynight, in the hopes that one day it'll become true ;)
 
-I've been trying to find the right words, but here's the truth: I don't want to overthink this.
-
-I just know I want more of these moments. More laughing, more talking, more of whatever this is between us.
-
-One more chest to go... 🗝️`,
+"There might be millions of roses in the whole world, but you're my only one, unique rose"
+- Antoine de Saint-Exupéry, The Little Prince`,
     },
   ],
 
