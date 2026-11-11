@@ -1,0 +1,39 @@
+@font-face { font-family:QuestPixel; src:url('../assets/fonts/PressStart2P-Regular.ttf') format('truetype'); font-display:swap; }
+:root { --font-game:QuestPixel,monospace; --color-gold:#ffda83; --btn-bg:#ffda83; --dialog-bg:#171b35; --dialog-title:#ffda83; }
+body { min-height:100dvh; display:grid; place-items:center; background:#0e1528; color:#fff0ce; }
+button { font-family:var(--font-game); touch-action:manipulation; }
+#game-canvas { border:4px solid #f3d5a3; box-shadow:0 0 0 4px #383b60,0 0 0 8px #080e20; }
+.screen { background:#141c36; gap:18px; overflow:auto; padding:32px 20px; }
+.cartridge-label { color:#9babc3; font-size:8px; letter-spacing:1px; line-height:2; }
+#start-title { white-space:pre-line; font-size:clamp(23px,4.5vw,48px); line-height:1.5; letter-spacing:0; color:#ffdb85; margin:0; text-shadow:3px 0 #a75549,-3px 0 #a75549,0 -3px #a75549,0 4px #a75549,4px 7px #080e20; }
+.world-label { display:flex; gap:24px; color:#ffda83; font-size:9px; line-height:2; }
+.world-label span { color:#c4d3df; }
+#title-scene { width:min(640px,94vw); height:auto; image-rendering:pixelated; border-bottom:4px solid #f3d5a3; }
+#start-subtitle { font-size:8px; line-height:2.2; color:#b7c6d9; margin:0; }
+#start-hint { font-size:8px; line-height:2.4; max-width:520px; color:#9cb6b1; margin:0; }
+#start-btn,#dialog-close,#yes-btn,#no-btn { font-size:10px; line-height:1.8; border:3px solid #fff0ce; box-shadow:inset -4px -4px #ba804d,inset 4px 4px #fff0ce,4px 4px #070e21; padding:14px 22px; background:#ffda83; color:#202540; letter-spacing:0; transition:none; }
+#start-btn:hover,#dialog-close:hover,#yes-btn:hover,#no-btn:hover { background:#fff0ce; transform:translateY(-2px); }
+button:focus-visible { outline:3px solid #e98ca3; outline-offset:6px; }
+#hud { top:16px; left:50%; transform:translateX(-50%); width:min(94vw,960px); gap:9px; background:#141c36; padding:12px 16px; border-bottom:3px solid #67788b; }
+.hud-world { display:flex; justify-content:space-between; font-size:9px; color:#ffda83; }
+.hud-world span { color:#fff0ce; }
+.heart { font-family:var(--font-game); font-size:15px; }
+#quest-progress { color:#fff0ce; font-size:8px; line-height:1.8; }
+#controls-hint { color:#9babc3; font-size:7px; line-height:1.8; }
+#dialog-box { background:#141c36; border:4px solid #fff0ce; outline:4px solid #333d5f; box-shadow:8px 8px #080e20; bottom:20px; max-height:72dvh; max-width:620px; overflow:auto; padding:24px; font-size:10px; line-height:2.4; text-align:left; align-items:flex-start; }
+#dialog-title { font-size:11px; line-height:2; color:#ffda83; }
+#dialog-close { align-self:flex-end; font-size:8px; padding:10px 16px; }
+#end-screen { background:#141c36f5; justify-content:safe center; }
+#end-title { font-size:clamp(16px,3vw,28px); line-height:1.8; color:#ffda83; text-shadow:3px 3px #9b4d61; }
+#end-message { font-size:10px; line-height:2.5; max-width:580px; }
+#end-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+#no-btn { background:#9babc3; box-shadow:inset -4px -4px #67788b,inset 4px 4px #d9e0df,4px 4px #070e21; }
+#touch-controls { display:none; width:94vw; justify-content:space-between; align-items:center; position:fixed; bottom:10px; }
+#touch-controls button { touch-action:none; background:#303c5d; color:#fff0ce; border:3px solid #9babc3; box-shadow:inset -3px -3px #17213a; min-width:44px; min-height:44px; font:9px var(--font-game); padding:8px; }
+.dpad { display:grid; grid-template-columns:repeat(3,44px); gap:4px; }
+.dpad button:first-child { grid-column:2; }
+.dpad button:nth-child(2) { grid-column:1; }
+@media(pointer:coarse) { #touch-controls { display:flex; } #dialog-box { bottom:116px; max-height:60dvh; } }
+@media(max-width:500px) { .screen { gap:16px; } .cartridge-label { font-size:6px; } .world-label { font-size:7px; gap:14px; } #hud { padding:8px; } #controls-hint { font-size:6px; } #dialog-box { font-size:9px; padding:16px; } }
+@media(max-height:650px) { .screen { gap:10px; padding:18px; justify-content:safe center; } #title-scene { max-height:120px; width:auto; max-width:90vw; } #start-title { font-size:26px; } #hud { top:4px; } }
+@media(prefers-reduced-motion:reduce) { button { transform:none!important; } }

@@ -25,6 +25,19 @@ const Input = (() => {
     held.delete(e.key);
   });
 
+  window.addEventListener('blur', () => held.clear());
+  document.addEventListener('visibilitychange', () => held.clear());
+  document.querySelectorAll('[data-key]').forEach(button => {
+    button.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      button.setPointerCapture(event.pointerId);
+      held.add(button.dataset.key);
+    });
+    for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+      button.addEventListener(event, () => held.delete(button.dataset.key));
+    }
+  });
+
   /* ─── Query helpers ─── */
 
   /** True if any "move up" key is held */

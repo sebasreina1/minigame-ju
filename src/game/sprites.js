@@ -23,12 +23,21 @@ const Sprites = (() => {
   function drawGrass(ctx, px, py, alternate) {
     ctx.fillStyle = alternate ? C.grassAlt : C.grass;
     ctx.fillRect(px, py, T, T);
+    ctx.fillStyle = '#739078';
+    if ((px / T + py / T) % 3 === 0) {
+      ctx.fillRect(px + 7, py + 20, 2, 3);
+      ctx.fillRect(px + 10, py + 18, 2, 4);
+    }
   }
 
   /** Stone path tile */
   function drawPath(ctx, px, py, alternate) {
     ctx.fillStyle = alternate ? C.pathAlt : C.path;
     ctx.fillRect(px, py, T, T);
+    ctx.fillStyle = '#dec28c'; ctx.fillRect(px + 2, py + 2, 26, 2);
+    ctx.fillStyle = '#927456'; ctx.fillRect(px + 29, py + 4, 2, 26);
+    ctx.fillRect(px + 4, py + 29, 25, 2);
+    ctx.fillRect(px + 9, py + 13, 3, 2);
   }
 
   /** Wall tile — solid block with a dark bottom edge */
@@ -38,6 +47,10 @@ const Sprites = (() => {
     // Shadow band at the bottom
     ctx.fillStyle = C.wallShadow;
     ctx.fillRect(px, py + T - 6, T, 6);
+    ctx.fillStyle = '#91839b'; ctx.fillRect(px + 1, py + 1, 30, 2);
+    ctx.fillRect(px + 1, py + 15, 30, 2);
+    ctx.fillStyle = '#302d47'; ctx.fillRect(px + 14, py + 2, 2, 13);
+    ctx.fillRect(px + 5, py + 17, 2, 10);
   }
 
   /** Water tile — solid blue with two horizontal shine lines */
@@ -142,56 +155,44 @@ const Sprites = (() => {
        - Red "hourglass" marking on the abdomen (like a black widow)
        - Multiple small eyes
   ──────────────────────────────────────────────── */
+  // The Thorn King: a chunky 32 x 32 sprite drawn on a 2px grid.
   function drawBoss(ctx, px, py, bobOffset, flashWhite) {
-    const bw = T * 2 - 8;             // overall width
-    const bh = T * 2 - 8;             // overall height
-    const bx = px - T / 2 + 4;        // left edge
-    const by = py - T / 2 + 4 + bobOffset;  // top edge (with float animation)
-
-    const bodyColor = flashWhite ? '#ffffff' : C.bossBlue;   // spider body color
-    const legColor  = flashWhite ? '#ffffff' : '#1a1a1a';    // legs are near-black
-
-    // ── Legs (4 per side, angled lines made of thin rects) ──
-    // Each leg is drawn as two short segments to fake a "bent" leg look
-    ctx.fillStyle = legColor;
-    for (let i = 0; i < 4; i++) {
-      const legY = by + 8 + i * 9;
-      // Left legs — angle outward to the left
-      ctx.fillRect(bx - 14, legY, 14, 3);
-      ctx.fillRect(bx - 18, legY - 4, 6, 3);
-      // Right legs — angle outward to the right
-      ctx.fillRect(bx + bw,      legY, 14, 3);
-      ctx.fillRect(bx + bw + 12, legY - 4, 6, 3);
-    }
-
-    // ── Body (abdomen) — round-ish shape using stacked rows of varying width ──
-    ctx.fillStyle = bodyColor;
-    ctx.fillRect(bx + 6,  by,      bw - 12, 6);    // top (narrow)
-    ctx.fillRect(bx + 2,  by + 6,  bw - 4,  bh - 16); // middle (wide)
-    ctx.fillRect(bx + 6,  by + bh - 10, bw - 12, 10);  // bottom (narrow)
-
-    // Body outline
-    // Body outline — traces the tapered shape instead of one big rectangle
-    ctx.strokeStyle = C.bossOutline;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(bx + 6, by,           bw - 12, 6);          // top section outline
-    ctx.strokeRect(bx + 2, by + 6,       bw - 4,  bh - 16);     // middle section outline
-    ctx.strokeRect(bx + 6, by + bh - 10, bw - 12, 10);          // bottom section outline
-
-    // ── Red hourglass marking on the abdomen ──
-    ctx.fillStyle = flashWhite ? '#ffffff' : C.bossRed;
-    const midX = bx + bw / 2;
-    const midY = by + bh / 2;
-    ctx.fillRect(midX - 1, midY - 10, 2, 6);    // top triangle (simplified as a line)
-    ctx.fillRect(midX - 4, midY - 4,  8, 3);    // hourglass pinch point
-    ctx.fillRect(midX - 1, midY + 4,  2, 6);    // bottom triangle
-
-    // ── Eyes (several small dots near the top, spiders have many eyes) ──
-    ctx.fillStyle = C.bossEye;
-    ctx.fillRect(bx + bw / 2 - 8, by + 4, 3, 3);
-    ctx.fillRect(bx + bw / 2 - 3, by + 2, 4, 4);   // slightly bigger center eyes
-    ctx.fillRect(bx + bw / 2 + 2, by + 2, 4, 4);
-    ctx.fillRect(bx + bw / 2 + 7, by + 4, 3, 3);
+    const x = Math.round(px - 16), y = Math.round(py - 26 + bobOffset);
+    const ink = '#171b32', dark = '#3c3159', leaf = '#397b61';
+    const rect = (dx, dy, w, h, color) => {
+      ctx.fillStyle = flashWhite ? '#fff1cf' : color;
+      ctx.fillRect(x + dx * 2, y + dy * 2, w * 2, h * 2);
+    };
+    // Ground shadow, cape, and alternating heavy boots.
+    ctx.fillStyle = '#243944'; ctx.fillRect(x + 2, py + 29, 62, 6);
+    rect(5,12,22,18,ink); rect(7,14,18,15,'#8b3c64');
+    rect(8,16,3,12,'#bf5675'); rect(22,16,3,12,'#582d51');
+    const step = bobOffset > 0 ? 1 : 0;
+    rect(6,28+step,9,4,ink); rect(18,29-step,9,4,ink);
+    rect(7,28+step,6,2,'#698084'); rect(19,29-step,6,2,'#698084');
+    // Spiked shoulders and armored chest.
+    rect(1,13,8,6,ink); rect(24,13,8,6,ink);
+    rect(2,11,2,4,'#fff0ba'); rect(28,11,2,4,'#fff0ba');
+    rect(2,14,7,3,leaf); rect(25,14,6,3,leaf);
+    rect(7,14,18,12,ink); rect(9,14,14,11,leaf);
+    rect(10,15,4,8,'#64ae79'); rect(21,15,2,9,'#245749');
+    rect(14,16,5,6,'#eab568'); rect(15,17,3,3,'#fff0ba');
+    rect(9,24,14,2,'#eab568'); rect(15,24,3,2,ink);
+    // Gauntlets.
+    rect(2,19,6,7,ink); rect(25,19,6,7,ink);
+    rect(3,20,4,4,'#a4b6a0'); rect(26,20,4,4,'#a4b6a0');
+    // Horns, brow, glowing eyes, and a toothy grin.
+    rect(6,5,20,11,ink); rect(8,6,16,9,dark);
+    rect(4,3,3,7,'#eab568'); rect(3,1,2,4,'#fff0ba');
+    rect(25,3,3,7,'#eab568'); rect(27,1,2,4,'#fff0ba');
+    rect(9,8,6,2,'#a688b0'); rect(18,8,5,2,'#a688b0');
+    rect(10,10,5,2,'#fff0ba'); rect(18,10,5,2,'#fff0ba');
+    rect(13,10,2,2,'#ef765d'); rect(18,10,2,2,'#ef765d');
+    rect(12,14,9,2,ink); rect(13,14,2,1,'#fff0ba'); rect(18,14,2,1,'#fff0ba');
+    // Three-point crown.
+    rect(10,2,13,4,ink); rect(11,1,2,4,'#eab568');
+    rect(15,0,3,5,'#fff0ba'); rect(21,1,2,4,'#eab568');
+    rect(11,4,12,2,'#eab568'); rect(16,4,2,2,'#e55d73');
   }
 
   /**
@@ -261,48 +262,16 @@ const Sprites = (() => {
 
 
 
-    // ── Sword swing (only visible when attacking) ──
-    // ── Sword swing — always swings left to right, with a pointed tip ──
-    // ── Sword swing — only visible when facing left/right, with a pointed tip ──
-// ── Gun — only visible when facing left/right ──
     if (swordActive) {
-      ctx.fillStyle = '#555555';   // gun barrel/body — dark grey
-
-      if (dir === 'right') {
-        // Barrel
-        ctx.fillRect(px + T - 2, py + 14, 14, 4);
-        // Grip (angled down from the back of the barrel)
-        ctx.fillRect(px + T + 2, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px + T + 1, py + 17, 2, 2);
-
-      } else if (dir === 'up') {
-        // Barrel
-        ctx.fillRect(px + T - 2, py + 14, 14, 4);
-        // Grip (angled down from the back of the barrel)
-        ctx.fillRect(px + T + 2, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px + T + 1, py + 17, 2, 2);
-
-      } else if (dir === 'down') {
-        // Barrel
-        ctx.fillRect(px - 12, py + 14, 14, 4);
-        // Grip
-        ctx.fillRect(px - 6, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px - 3, py + 17, 2, 2);
-      } else if (dir === 'left') {
-        // Barrel
-        ctx.fillRect(px - 12, py + 14, 14, 4);
-        // Grip
-        ctx.fillRect(px - 6, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px - 3, py + 17, 2, 2);
-      }
+      ctx.save();
+      ctx.translate(px + 16, py + 18);
+      ctx.rotate(({right:0, down:Math.PI/2, left:Math.PI, up:-Math.PI/2})[dir]);
+      ctx.fillStyle = '#27243f'; ctx.fillRect(10,-5,25,8);
+      ctx.fillStyle = '#fff0c9'; ctx.fillRect(12,-3,20,3);
+      ctx.fillStyle = '#8fcee0'; ctx.fillRect(12,0,17,2);
+      ctx.fillStyle = '#edba68'; ctx.fillRect(9,-7,3,12);
+      ctx.fillStyle = '#f5e8bd'; ctx.fillRect(31,-2,4,3);
+      ctx.restore();
     }
 
     ctx.globalAlpha = 1;  // always reset alpha
@@ -320,8 +289,33 @@ const Sprites = (() => {
     ctx.globalAlpha = 1;
   }
 
+  // Hand-drawn pixel keepsakes: rose, music, picnic, star, and final heart.
+  function drawKeepsake(ctx, px, py, kind, collected, tick) {
+    const patterns = [
+      ['..ppp..','.pPPPp.','..pPp..','...g...','.g.g...','..gg...','...g...'],
+      ['..yyyy.','..y..y.','..y..y.','..y..y.','.yy.yy.','yyy.yyy','.y...y.'],
+      ['...b...','..b.b..','.wwwww.','.bwbwb.','.wbwbw.','.bbbbb.','.......'],
+      ['...y...','...y...','.yyyyy.','..yyy..','.yy.yy.','.y...y.','.......'],
+      ['.pp.pp.','pPPpPPp','pPPPP Pp'.replace(' ', ''),'.pPPPp.','..pPp..','...p...','.......']
+    ];
+    ctx.save();
+    ctx.fillStyle = '#293b48'; ctx.fillRect(px + 5, py + 26, 22, 4);
+    ctx.globalAlpha = collected ? 0.35 : 1;
+    const bob = collected ? 0 : Math.round(Math.sin(tick / 20 + kind) * 2);
+    const colors = { p: '#d87591', P: '#ffd1d9', g: '#9fbc79', y: '#f4d58b', w: '#f8e5bf', b: '#b98472' };
+    patterns[kind].forEach((row, y) => [...row].forEach((pixel, x) => {
+      if (!colors[pixel]) return;
+      ctx.fillStyle = colors[pixel]; ctx.fillRect(px + 5 + x * 3, py + 3 + y * 3 + bob, 3, 3);
+    }));
+    if (!collected && Math.floor(tick / 30) % 2 === 0) {
+      ctx.fillStyle = '#ffedbb'; ctx.fillRect(px + 27, py + 3, 2, 2);
+    }
+    ctx.restore();
+  }
+
   /* ─── Public API ─── */
   return {
+    drawKeepsake,
     drawGrass,
     drawPath,
     drawWall,

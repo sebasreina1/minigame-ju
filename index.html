@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <base href="/minigame-ju/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adventure Quest</title>
+  <title>A Little Quest for You</title>
 
   <!-- ─── Stylesheets (edit each file for different parts of the UI) ─── -->
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/screens.css" />
   <link rel="stylesheet" href="css/hud.css" />
   <link rel="stylesheet" href="css/dialog.css" />
+  <link rel="stylesheet" href="css/remix.css" />
 </head>
 <body tabindex="0">
 
@@ -19,7 +19,10 @@
        Edit text in config/gameConfig.js → SCREENS.start
   ════════════════════════════════════════════════════════════ -->
   <div id="start-screen" class="screen">
+    <div class="cartridge-label">SEBASTIAN PRESENTS / A QUEST FOR TWO</div>
     <h1 id="start-title">✦ QUEST FOR JULIETTE ✦</h1>
+    <div class="world-label">WORLD 01 <span>THE WISHING GARDEN</span></div>
+    <canvas id="title-scene" width="640" height="176" aria-label="Pixel garden with a castle and its guardian"></canvas>
     <p id="start-subtitle">Arrow keys or WASD to move · Space / Z to attack</p>
     <p id="start-hint">Find all letters · Defeat the boss · Answer the question</p>
     <button id="start-btn">START</button>
@@ -38,8 +41,10 @@
        Styled in css/hud.css
   ════════════════════════════════════════════════════════════ -->
   <div id="hud" class="hidden">
-    <div id="hp-bar"></div>
-    <div id="controls-hint">SPACE / Z → Attack</div>
+    <div class="hud-world">PLAYER 01 <span>WORLD 1-1</span></div>
+    <div id="hp-bar" aria-label="Health"></div>
+    <div id="quest-progress" aria-live="polite">Keepsakes 0 / 4</div>
+    <div id="controls-hint">MOVE: WASD / ARROWS &nbsp; SWING: Z / SPACE</div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -48,7 +53,7 @@
        Text is set in src/game/dialog.js
        Styled in css/dialog.css
   ════════════════════════════════════════════════════════════ -->
-  <div id="dialog-box" class="hidden">
+  <div id="dialog-box" class="hidden" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
     <div id="dialog-title"></div>
     <div id="dialog-text"></div>
     <button id="dialog-close">Continue ▶</button>
@@ -65,6 +70,10 @@
     <div id="end-buttons"></div>
   </div>
 
+  <div id="touch-controls" aria-label="Game controls">
+    <div class="dpad"><button data-key="ArrowUp" aria-label="Move up">▲</button><button data-key="ArrowLeft" aria-label="Move left">◀</button><button data-key="ArrowDown" aria-label="Move down">▼</button><button data-key="ArrowRight" aria-label="Move right">▶</button></div>
+    <button data-key="z" aria-label="Swing sword">Z / SWING</button>
+  </div>
   <!-- ─── Load game modules in dependency order ─── -->
   <script src="src/config/gameConfig.js"></script>
   <script src="src/game/renderer.js"></script>
@@ -76,6 +85,7 @@
   <script src="src/game/hud.js"></script>
   <script src="src/game/screens.js"></script>
   <script src="src/game/main.js"></script>
+  <script src="src/game/titleScene.js"></script>
 
 </body>
 </html>

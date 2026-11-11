@@ -23,8 +23,9 @@ const Renderer = (() => {
 
   canvas.width  = W;
   canvas.height = H;
-  canvas.style.width  = '100vw';
-  canvas.style.height = '100vh';
+  ctx.imageSmoothingEnabled = false;
+  canvas.style.width  = 'min(94vw, 960px, calc((100dvh - 180px) * 4 / 3))';
+  canvas.style.height = 'auto';
   canvas.style.maxWidth  = '100vw';
   canvas.style.maxHeight = '100vh';
   canvas.style.objectFit = 'contain';
@@ -33,9 +34,11 @@ const Renderer = (() => {
    * Draw one complete frame.
    * @param {object} entities - { player, boss, chests, particles } from entities.js
    */
+  let tick = 0;
   function drawFrame(entities) {
     const { player, boss, chests, particles } = entities;
     const T = CONFIG.TILE_SIZE;
+    tick++;
 
     // Clear canvas
     ctx.clearRect(0, 0, W, H);
@@ -49,9 +52,9 @@ const Renderer = (() => {
       const py = ch.y * T;
 
       if (ch.type === 'letter') {
-        Sprites.drawLetterChest(ctx, px, py, ch.opened);
+        Sprites.drawKeepsake(ctx, px, py, ch.letterIdx, ch.opened, tick);
       } else if (ch.type === 'final') {
-        Sprites.drawFinalChest(ctx, px, py, ch.locked);
+        Sprites.drawKeepsake(ctx, px, py, 4, ch.locked, tick);
       }
       // 'boss' type chest has no visual — the boss sprite fills that space
     }
@@ -60,7 +63,7 @@ const Renderer = (() => {
     if (boss.alive) {
       const px        = boss.x * T;
       const py        = boss.y * T;
-      const bobOffset = Math.sin(boss.animTick * 0.08) * 3;   // gentle float
+      const bobOffset = Math.round(Math.sin(boss.animTick * 0.08)) * 2;   // gentle float
       const flash     = boss.hitFlash > 0;
 
       Sprites.drawBoss(ctx, px, py, bobOffset, flash);

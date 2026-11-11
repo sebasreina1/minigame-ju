@@ -66,24 +66,11 @@ const Screens = (() => {
     // ── NO button ──
     // Every click moves it to a random position so it can't be pressed
     const noBtn = document.createElement('button');
-    noCount = 0;
-    noBtn.id          = 'no-btn';
+    noBtn.id = 'no-btn';
     noBtn.textContent = S.end.noLabel;
     noBtn.addEventListener('click', () => {
-      noCount++;
-      noBtn.style.left = (Math.random() * 260) + 'px';
-      noBtn.style.top  = (Math.random() * 80)  + 'px';
-      
-      if (noCount === 3) {
-          endMessage.textContent = "It won't be as easy as you thought...";
-      } else if (noCount === 5) {
-          endMessage.textContent = "Bruh, come on 💀";
-      } else if (noCount === 8) {
-          endMessage.textContent = "this has to be a joke lmao";
-      }
-      else if (noCount === 14) {
-          endMessage.textContent = "😭😭😭😭😭😭";
-      }
+      endMessage.textContent = 'Take all the time you need. This little garden will be here for you.';
+      noBtn.remove();
     });
 
     endButtons.appendChild(yesBtn);

@@ -30,6 +30,7 @@ const Dialog = (() => {
     _onClose = onClose || null;
 
     box.classList.remove('hidden');
+    btn.focus();
   }
 
   /**
@@ -49,6 +50,10 @@ const Dialog = (() => {
   function isOpen() {
     return !box.classList.contains('hidden');
   }
+
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && isOpen()) { event.preventDefault(); close(); }
+  });
 
   // Wire up the "Continue" button
   btn.addEventListener('click', close);

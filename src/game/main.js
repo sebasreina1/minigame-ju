@@ -83,14 +83,7 @@ function checkChestInteraction() {
   for (const ch of Entities.chests) {
     if (!nearby.some(pos => pos.x === ch.x && pos.y === ch.y)) continue;
     if (ch.type === 'letter' && !ch.opened) {
-      if (ch.order === state.lettersFound + 1) {
-          openLetterChest(ch);
-        } else {
-          Dialog.show(
-            'Not yet!',
-            'This chest wants to wait its turn...\nFind the earlier letters first.'
-          );
-        }
+      openLetterChest(ch);
       return;
     }
     if (ch.type === 'boss' && ch.locked) {
@@ -103,6 +96,7 @@ function checkChestInteraction() {
       } else {
         ch.locked = false;
         ch.opened = true;
+        state.running = false;
         Screens.showEndScreen();
       }
       return;
@@ -113,12 +107,16 @@ function checkChestInteraction() {
 function openLetterChest(chest) {
   chest.opened = true;
   state.lettersFound++;
+  updateQuest();
   Entities.spawnParticles(chest.x, chest.y, CONFIG.COLORS.particleGold);
   const letter = CONFIG.LETTERS[chest.letterIdx];
   Dialog.show(letter.title, letter.text, () => {
     if (state.lettersFound >= CONFIG.LETTERS.length) {
       const bossCh = Entities.chests.find(c => c.type === 'boss');
       if (bossCh) bossCh.locked = false;
+      Entities.boss.alive = true;
+      Entities.player.hp = Entities.player.maxHP;
+      HUD.updateHP(Entities.player.hp, Entities.player.maxHP);
     }
   });
 }
@@ -153,7 +151,7 @@ function moveBossTowardPlayer() {
   let nx = b.x, ny = b.y;
   if (Math.abs(dx) >= Math.abs(dy)) nx += Math.sign(dx);
   else                               ny += Math.sign(dy);
-  if (nx >= 1 && nx < CONFIG.COLS - 1 && ny >= 1 && ny < CONFIG.ROWS - 1) {
+  if (!GameMap.isSolid(nx, ny, Entities.chests)) {
     b.x = nx;
     b.y = ny;
   }
@@ -180,6 +178,7 @@ function killBoss() {
   // Mark boss as dead FIRST
   b.alive = false;
   state.bossDefeated = true;
+  updateQuest();
 
   // Unlock the final chest
   const finalCh = Entities.chests.find(c => c.type === 'final');
@@ -205,6 +204,14 @@ function respawnPlayer() {
   p.y  = cfg.startY;
   HUD.updateHP(p.hp, p.maxHP);
   Dialog.show(CONFIG.SCREENS.playerDied.title, CONFIG.SCREENS.playerDied.text);
+}
+
+function updateQuest() {
+  document.getElementById('quest-progress').textContent = state.bossDefeated
+    ? 'Follow the heart to the north ↑'
+    : state.lettersFound === CONFIG.LETTERS.length
+      ? 'All keepsakes found · Defeat the guardian!'
+      : `Keepsakes ${state.lettersFound} / ${CONFIG.LETTERS.length} · Explore the garden`;
 }
 
 // Boot

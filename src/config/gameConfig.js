@@ -42,39 +42,10 @@ const CONFIG = {
      letterIdx: index into this array (0, 1, 2…)
   ──────────────────────────────────────────────── */
   LETTERS: [
-    {
-      title: "Chest #1",
-      text:
-`Hey, I think by now you have realized that this is not me asking you a favour to test a project, this is the thing that i told you about for the past few days
-
-I built every little detail while thinking about you, and as you can see is very professional looking lool. 
-
-Keep Opening the chests and you'll see more of this ;)`,
-    },
-    {
-      title: "Chest #2",
-      text:
-`Ever since the beginnig when our eyes met that first time I had a feeling, something pulling me closer towards you making my soul express his love towards you,on which I listened and 
-showed it to you in a form of a dance. In that moment I felt so happy to be dancing with someone as stunning as you, however. I did not express it, Maybe because I didn't want to scare
-off someone I just met but also wanted you to look at me with the same eyes I looked at you with `,
-    },
-    {
-      title: "Chest #3",
-      text:
-`All my life I thought about love in such a different way, I thought what i felt with other people was actually love, and I believed it. Until I met you
-that fire that you have and that spirit is something that draws me closer to you, the fact that we can go anywhere and no matter what, if we have eachother
-thats really all it matters.`,
-    },
-    {
-      title: "Chest #4",
-      text:
-`I really want to with all my heart to see you everyday, to laugh together about my horrible accent and to see all the cool places that Paris has to show, to just
-sit down in a park and drink some wine with cheese and salami, talking about how crazy of a year this was, and that thanks to our patiente and determination, we made
-this possible, to live together and have a life that we can both be proud of. Thats something that I dream everynight, in the hopes that one day it'll become true ;)
-
-"There might be millions of roses in the whole world, but you're my only one, unique rose"
-- Antoine de Saint-Exupéry, The Little Prince`,
-    },
+    { title: '01 / A rose for you', text: 'A tiny rose, a very big feeling.\nSome things bloom a little brighter with you around.' },
+    { title: '02 / Our little dance', text: 'One song. Two people. A whole world fading away.\nHere is to all the dances still ahead of us.' },
+    { title: '03 / Somewhere together', text: 'A picnic beneath the trees. No rush, no grand plans.\nJust a little time together.' },
+    { title: '04 / Under the same stars', text: 'Even from far away, we share the same sky.\nAll four keepsakes are yours. The guardian is awake!' },
   ],
 
   /* ─────────────────────────────────────────────
@@ -132,17 +103,17 @@ this possible, to live together and have a life that we can both be proud of. Th
   ──────────────────────────────────────────────── */
   COLORS: {
     /* Map tiles */
-    grass:        '#5a8a3a',
-    grassAlt:     '#4a7a2a',
-    path:         '#c8a85a',
-    pathAlt:      '#b8984a',
-    wall:         '#6a5a4a',
-    wallShadow:   '#5a4a3a',
-    water:        '#3a6aaa',
-    waterShine:   '#4a7abb',
+    grass:        '#42665c',
+    grassAlt:     '#3c6055',
+    path:         '#bb9c7b',
+    pathAlt:      '#ad8e70',
+    wall:         '#58516b',
+    wallShadow:   '#423d56',
+    water:        '#465b89',
+    waterShine:   '#708bb2',
     treeTrunk:    '#6a4a2a',
-    treeLeaves:   '#2a6a2a',
-    treeTop:      '#3a8a3a',
+    treeLeaves:   '#294e4f',
+    treeTop:      '#3b7063',
 
     /* Chest */
     chestLid:     '#c8a030',
@@ -193,10 +164,10 @@ this possible, to live together and have a life that we can both be proud of. Th
   ──────────────────────────────────────────────── */
   SCREENS: {
     start: {
-      title:    '✦ ADVENTURE QUEST ✦',
+      title:    'A LITTLE QUEST\nFOR YOU',
       subtitle: 'Arrow keys or WASD to move · Space / Z to attack',
-      hint:     'Find all the keys · Defeat the boss · Claim your prize',
-      button:   'START',
+      hint:     'Four keepsakes. One little adventure. Something from the heart.',
+      button:   'START ADVENTURE',
     },
     intro: {
       title: 'How to play',
@@ -204,25 +175,25 @@ this possible, to live together and have a life that we can both be proud of. Th
 `Arrow keys / WASD → Move
 Space / Z → Attack
 
-Find all 3 chests,
+Collect all 4 keepsakes, in any order,
 then defeat the boss!
 
 Your answer awaits at the end.`,
     },
     bossLocked: {
       title: 'Locked!',
-      text:  'The chest glows... but something blocks it.\nFind all 3 letters first!',
+      text:  'The guardian is still dreaming.\nFind all 4 keepsakes first!',
     },
     finalLocked: {
       title: 'Locked!',
-      text:  'A powerful lock! Defeat the boss first!',
+      text:  'The wishing heart is sleeping. Defeat the guardian first!',
     },
     bossDefeated: {
-      title: 'Boss Defeated! 🏆',
+      title: 'GUARDIAN DEFEATED!',
       text:
 `The Guardian has fallen!
 
-A golden chest appeared to the north...
+A wishing heart is glowing to the north...
 Your final answer awaits!`,
     },
     playerDied: {
@@ -232,28 +203,19 @@ Your final answer awaits!`,
 But a fairy revived you!`,
     },
     end: {
-      title:   '❤️ Final Question ❤️',
+      title:   'PLAYER TWO?',
       message:
-`Dear Juliette,
-
-I made this to prove to you that no matter how far I am from you I would 
-always try my best to impress you my love. 
-Je t'aime
-
-And as for the last part of the quest, something that I knew from day one 
-but couldn't express it fully. I would like to ask you... 
-
-Do you want to be my Girlfriend?`,
-      yesLabel: 'Oui! ❤️',
-      noLabel:  'Non',
-      yesTitle:  '🎉 LETSGOOO She Said YES! 🎉',
+`For you,\n\nA rose, a dance, a quiet afternoon, and a sky full of stars.\nLittle things I would love to share with you.\n\nWill you be my player two?`,
+      yesLabel: 'OUI! <3',
+      noLabel:  'A little more time',
+      yesTitle:  'ADVENTURE UNLOCKED!',
       yesMessage:
-`I knew it! 
+`My favourite adventure starts here.
 
 Achievement unlocked:
-Being your boyfriend.
+Player two, found.
 
-— Sebastian 😛`,
+With love, Sebastian`,
     },
   },
 };

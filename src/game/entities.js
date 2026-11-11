@@ -31,7 +31,7 @@ const Entities = (() => {
     y:         CONFIG.BOSS.startY,
     hp:        CONFIG.BOSS.maxHP,
     maxHP:     CONFIG.BOSS.maxHP,
-    alive:     true,
+    alive:     false,
     animTick:  0,           // increments every frame for bobbing animation
     moveTimer: 0,           // counts up; boss moves when it hits CONFIG.BOSS.moveEveryNFrames
     hitFlash:  0,           // countdown: boss flashes white when recently hit
