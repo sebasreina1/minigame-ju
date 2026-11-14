@@ -48,9 +48,15 @@
        Text is set in src/game/dialog.js
        Styled in css/dialog.css
   ════════════════════════════════════════════════════════════ -->
-  <div id="dialog-box" class="hidden">
+  <div id="dialog-box" class="hidden" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
     <div id="dialog-title"></div>
     <div id="dialog-text"></div>
+    <form id="riddle-form" class="hidden">
+      <label for="riddle-answer">Your answer</label>
+      <input id="riddle-answer" name="answer" type="text" autocomplete="off" required aria-describedby="riddle-feedback" />
+      <p id="riddle-feedback" role="status" aria-live="polite"></p>
+      <button type="submit">Unlock chest</button>
+    </form>
     <button id="dialog-close">Continue ▶</button>
   </div>
 

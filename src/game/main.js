@@ -111,6 +111,12 @@ function checkChestInteraction() {
 }
 
 function openLetterChest(chest) {
+  if (chest.opened) return;
+  Dialog.askRiddle(CONFIG.RIDDLES[chest.letterIdx], () => collectLetterChest(chest));
+}
+
+function collectLetterChest(chest) {
+  if (chest.opened) return;
   chest.opened = true;
   state.lettersFound++;
   Entities.spawnParticles(chest.x, chest.y, CONFIG.COLORS.particleGold);

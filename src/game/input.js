@@ -14,6 +14,7 @@ const Input = (() => {
 
   // Listen on the window so the canvas doesn't need focus
   window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(e.target.tagName) || e.target.isContentEditable || Dialog.isOpen()) return;
     held.add(e.key);
     // Prevent arrow keys from scrolling the page
     if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) {
@@ -24,6 +25,9 @@ const Input = (() => {
   window.addEventListener('keyup', (e) => {
     held.delete(e.key);
   });
+
+  window.addEventListener('blur', () => held.clear());
+  document.addEventListener('focusin', () => held.clear());
 
   /* ─── Query helpers ─── */
 

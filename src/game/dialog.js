@@ -16,6 +16,12 @@ const Dialog = (() => {
   const text  = document.getElementById('dialog-text');
   const btn   = document.getElementById('dialog-close');
 
+  const form = document.getElementById('riddle-form');
+  const answer = document.getElementById('riddle-answer');
+  const feedback = document.getElementById('riddle-feedback');
+  let riddle = null;
+  let onSolved = null;
+
   let _onClose = null;   // callback to run when player presses Continue
 
   /**
@@ -25,18 +31,25 @@ const Dialog = (() => {
    * @param {Function} [onClose]  - Optional callback called when player closes the dialog
    */
   function show(titleText, bodyText, onClose) {
+    riddle = null;
+    onSolved = null;
+    form.classList.add('hidden');
+    btn.classList.remove('hidden');
     title.textContent = titleText;
     text.textContent  = bodyText;   // CSS white-space:pre-line handles \n
     _onClose = onClose || null;
 
     box.classList.remove('hidden');
+    btn.focus();
   }
 
   /**
    * Close the dialog programmatically (also called by the button).
    */
   function close() {
+    if (riddle) return; // A riddle cannot be dismissed to bypass its answer.
     box.classList.add('hidden');
+    document.body.focus();
     const cb = _onClose;
     _onClose = null;
     if (cb) cb();
@@ -50,9 +63,36 @@ const Dialog = (() => {
     return !box.classList.contains('hidden');
   }
 
+  function askRiddle(puzzle, onCorrect) {
+    show('Solve the chest riddle', puzzle.question);
+    riddle = puzzle;
+    onSolved = onCorrect;
+    answer.value = '';
+    feedback.textContent = '';
+    btn.classList.add('hidden');
+    form.classList.remove('hidden');
+    answer.focus();
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!riddle) return;
+    const value = answer.value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.!?]+$/, '').trim();
+    if (!riddle.answers.includes(value)) {
+      feedback.textContent = 'Not quite. Try another answer — there is no penalty.';
+      answer.focus();
+      return;
+    }
+    const solved = onSolved;
+    riddle = null;
+    onSolved = null;
+    close();
+    solved();
+  });
+
   // Wire up the "Continue" button
   btn.addEventListener('click', close);
 
   /* ─── Public API ─── */
-  return { show, close, isOpen };
+  return { show, askRiddle, close, isOpen };
 })();

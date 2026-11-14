@@ -130,3 +130,25 @@ To add a new key binding, edit `src/game/input.js`.
 - Each file has a comment block at the top explaining what it does
 - Every section is marked with `// ──` comments so you can Ctrl+F to find things fast
 - All text content lives in `gameConfig.js → SCREENS` so you never need to dig through logic files just to change a word
+
+## Riddle chests
+
+Ordinary chests now require a correct text answer before awarding their letter.
+Wrong answers allow unlimited retries without losing health. Answers accept case,
+extra spaces, a leading article, and trailing sentence punctuation. Gameplay
+pauses while the dialog is open, and keyboard input stays in the answer field.
+
+Edit `CONFIG.RIDDLES` in `src/config/gameConfig.js`; its indices match `LETTERS`.
+Each entry needs a `question` and a list of lowercase accepted `answers`.
+When adding a letter chest, add its matching riddle too.
+
+Run the dependency-free progression and keyboard checks with:
+
+```sh
+node checks/riddles.cjs
+```
+
+The questions use rewritten versions of classic object riddles, not Batman quotes.
+Reference collections: [ABCmouse classic riddles](https://www.abcmouse.com/learn/wp-content/uploads/2024/08/ABCmouse-Easy-Riddles-for-Kids-with-Answers.pdf)
+and [Dungeon Snacks riddles](https://www.dungeonsnacks.com/riddles/).
+Hints and the final crown puzzle are planned separately.

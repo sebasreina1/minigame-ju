@@ -60,3 +60,18 @@
 #dialog-close:hover {
   background: var(--color-gold);
 }
+
+/* Keep answer entry visible above the mobile keyboard in short viewports. */
+#dialog-box { max-height: 85dvh; overflow-y: auto; }
+#riddle-form { width: 100%; display: grid; gap: 10px; text-align: left; }
+#riddle-answer {
+  width: 100%; min-height: 44px; padding: 10px;
+  font: 16px var(--font-game);
+  background: var(--dialog-bg); color: var(--dialog-text);
+  border: 2px solid var(--dialog-border);
+}
+#riddle-form button {
+  min-height: 44px; padding: 10px; font: inherit;
+  background: var(--btn-bg); color: var(--btn-color); border: 0;
+}
+#riddle-feedback { font-size: 12px; line-height: 1.5; }

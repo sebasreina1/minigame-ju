@@ -41,6 +41,14 @@ const CONFIG = {
      Each needs a matching chest in CHESTS below.
      letterIdx: index into this array (0, 1, 2…)
   ──────────────────────────────────────────────── */
+  // Classic object riddles, rewritten for the quest. Each index matches a letter chest.
+  RIDDLES: [
+    { question: 'My keys make music, but none can unlock a door. What am I?', answers: ['piano', 'a piano'] },
+    { question: 'As I dry you, I become wetter. What am I?', answers: ['towel', 'a towel'] },
+    { question: 'My cities have no buildings and my rivers never flow. What am I?', answers: ['map', 'a map'] },
+    { question: 'Water stays inside me, even though I am covered in holes. What am I?', answers: ['sponge', 'a sponge'] },
+  ],
+
   LETTERS: [
     {
       title: "Chest #1",
