@@ -43,10 +43,10 @@ const CONFIG = {
   ──────────────────────────────────────────────── */
   // Classic object riddles, rewritten for the quest. Each index matches a letter chest.
   RIDDLES: [
-    { question: 'My keys make music, but none can unlock a door. What am I?', answers: ['piano', 'a piano'] },
-    { question: 'As I dry you, I become wetter. What am I?', answers: ['towel', 'a towel'] },
-    { question: 'My cities have no buildings and my rivers never flow. What am I?', answers: ['map', 'a map'] },
-    { question: 'Water stays inside me, even though I am covered in holes. What am I?', answers: ['sponge', 'a sponge'] },
+    { question: 'My keys make music, but none can unlock a door. What am I?', answers: ['piano', 'a piano'], hints: ['Think of a musical instrument.', 'Look for black and white keys.'] },
+    { question: 'As I dry you, I become wetter. What am I?', answers: ['towel', 'a towel'], hints: ['You use it after washing.', 'It absorbs the water from your skin.'] },
+    { question: 'My cities have no buildings and my rivers never flow. What am I?', answers: ['map', 'a map'], hints: ['It represents real places.', 'You might unfold it to find your way.'] },
+    { question: 'Water stays inside me, even though I am covered in holes. What am I?', answers: ['sponge', 'a sponge'], hints: ['Think of a cleaning tool.', 'Its tiny holes soak up liquid.'] },
   ],
 
   LETTERS: [

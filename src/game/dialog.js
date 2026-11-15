@@ -21,6 +21,7 @@ const Dialog = (() => {
   const feedback = document.getElementById('riddle-feedback');
   let riddle = null;
   let onSolved = null;
+  let wrongAttempts = 0;
 
   let _onClose = null;   // callback to run when player presses Continue
 
@@ -66,6 +67,7 @@ const Dialog = (() => {
   function askRiddle(puzzle, onCorrect) {
     show('Solve the chest riddle', puzzle.question);
     riddle = puzzle;
+    wrongAttempts = 0;
     onSolved = onCorrect;
     answer.value = '';
     feedback.textContent = '';
@@ -79,7 +81,10 @@ const Dialog = (() => {
     if (!riddle) return;
     const value = answer.value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.!?]+$/, '').trim();
     if (!riddle.answers.includes(value)) {
-      feedback.textContent = 'Not quite. Try another answer — there is no penalty.';
+      wrongAttempts++;
+      const hints = riddle.hints || [];
+      const hint = hints[Math.min(wrongAttempts - 2, hints.length - 1)];
+      feedback.textContent = 'Not quite. Try another answer — there is no penalty.' + (hint ? ' Hint: ' + hint : '');
       answer.focus();
       return;
     }

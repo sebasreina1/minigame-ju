@@ -43,6 +43,14 @@ submit('wrong');
 assert.equal(run('state.lettersFound'), 0);
 assert.equal(run("Entities.chests.find(c => c.type === 'letter').opened"), false);
 assert.match(nodes.get('riddle-feedback').textContent, /Try another/);
+assert.doesNotMatch(nodes.get('riddle-feedback').textContent, /Hint:/);
+submit('wrong again');
+assert.match(nodes.get('riddle-feedback').textContent, /musical instrument/);
+submit('still wrong');
+assert.match(nodes.get('riddle-feedback').textContent, /black and white keys/);
+submit('another guess');
+assert.match(nodes.get('riddle-feedback').textContent, /black and white keys/);
+assert.equal(run('state.lettersFound'), 0, 'hints must not award progress');
 for (const value of [' ', 'w', 'ArrowLeft']) {
   const event = key(value, 'INPUT');
   windowEvents.keydown(event);
@@ -60,6 +68,8 @@ assert.equal(run('Dialog.isOpen()'), false, 'opened chest stays opened');
 // Complete the other chests through the actual dialog submit handler.
 for (const [index, answer] of [[1, 'towel'], [2, 'a map'], [3, 'sponge']]) {
   run(`openLetterChest(Entities.chests.filter(c => c.type === 'letter')[${index}])`);
+  assert.equal(nodes.get('riddle-feedback').textContent, '', 'hints reset for each chest');
+  assert.equal(nodes.get('riddle-form').classList.contains('hidden'), false);
   submit(answer);
   run('Dialog.close()');
 }
