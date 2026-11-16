@@ -223,7 +223,7 @@ Your answer awaits at the end.`,
     },
     finalLocked: {
       title: 'Locked!',
-      text:  'A powerful lock! Defeat the boss first!',
+      text:  'Solve all four chest riddles and defeat the guardian first!',
     },
     bossDefeated: {
       title: 'Boss Defeated! 🏆',

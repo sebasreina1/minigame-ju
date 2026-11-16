@@ -98,7 +98,7 @@ function checkChestInteraction() {
       return;
     }
     if (ch.type === 'final' && !ch.opened) {
-      if (!state.bossDefeated) {
+      if (!state.bossDefeated || state.lettersFound < CONFIG.LETTERS.length) {
         Dialog.show(CONFIG.SCREENS.finalLocked.title, CONFIG.SCREENS.finalLocked.text);
       } else {
         ch.locked = false;

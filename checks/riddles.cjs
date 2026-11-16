@@ -31,10 +31,22 @@ function submit(answer) {
   nodes.get('riddle-answer').value = answer;
   nodes.get('riddle-form').listeners.submit({ preventDefault() {} });
 }
+function approachChest(type, index = 0) {
+  const chest = run(`Entities.chests.filter(chest => chest.type === '${type}')[${index}]`);
+  run(`Entities.player.x = ${chest.x}; Entities.player.y = ${chest.y + 1}; checkChestInteraction();`);
+}
+run('state.bossDefeated = true');
+approachChest('final');
+assert.equal(run("Entities.chests.find(chest => chest.type === 'final').opened"), false, 'cannot skip riddles by defeating the boss early');
+run('Dialog.close(); state.bossDefeated = false');
+approachChest('letter', 1);
+assert.match(nodes.get('dialog-title').textContent, /Not yet/);
+assert.equal(run('state.lettersFound'), 0, 'out-of-order chests must not award progress');
+run('Dialog.close()');
 const key = (key, tagName = 'BODY') => ({ key, target: { tagName }, preventDefault() { this.prevented = true; } });
 windowEvents.keydown(key('w'));
 assert.equal(run('Input.isMoveUp()'), true);
-run("openLetterChest(Entities.chests.find(c => c.type === 'letter'))");
+approachChest('letter');
 assert.equal(run('Input.isMoveUp()'), false, 'opening a dialog must release movement');
 assert.equal(run('state.lettersFound'), 0, 'opening a puzzle must not award progress');
 run('Dialog.close()');
@@ -67,7 +79,7 @@ run("openLetterChest(Entities.chests.find(c => c.type === 'letter'))");
 assert.equal(run('Dialog.isOpen()'), false, 'opened chest stays opened');
 // Complete the other chests through the actual dialog submit handler.
 for (const [index, answer] of [[1, 'towel'], [2, 'a map'], [3, 'sponge']]) {
-  run(`openLetterChest(Entities.chests.filter(c => c.type === 'letter')[${index}])`);
+  approachChest('letter', index);
   assert.equal(nodes.get('riddle-feedback').textContent, '', 'hints reset for each chest');
   assert.equal(nodes.get('riddle-form').classList.contains('hidden'), false);
   submit(answer);
@@ -75,6 +87,9 @@ for (const [index, answer] of [[1, 'towel'], [2, 'a map'], [3, 'sponge']]) {
 }
 assert.equal(run('state.lettersFound'), 4);
 assert.equal(run("Entities.chests.find(c => c.type === 'boss').locked"), false);
+run('state.bossDefeated = true');
+approachChest('final');
+assert.equal(run("Entities.chests.find(chest => chest.type === 'final').opened"), true, 'all riddles plus boss victory unlock the ending');
 windowEvents.keydown(key('ArrowLeft'));
 assert.equal(run('Input.isMoveLeft()'), true);
 windowEvents.blur();
