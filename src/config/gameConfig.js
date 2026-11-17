@@ -201,9 +201,9 @@ this possible, to live together and have a life that we can both be proud of. Th
   ──────────────────────────────────────────────── */
   SCREENS: {
     start: {
-      title:    '✦ ADVENTURE QUEST ✦',
+      title:    '✦ PRINCESS QUEST ✦',
       subtitle: 'Arrow keys or WASD to move · Space / Z to attack',
-      hint:     'Find all the keys · Defeat the boss · Claim your prize',
+      hint:     'Solve four riddles · Defeat the guardian · Open the final chest',
       button:   'START',
     },
     intro: {
@@ -212,14 +212,15 @@ this possible, to live together and have a life that we can both be proud of. Th
 `Arrow keys / WASD → Move
 Space / Z → Attack
 
-Find all 3 chests,
-then defeat the boss!
+Four riddles guard your path.
+Solve the chest riddles in order, then defeat the guardian.
+Wrong answers are safe. Keep trying to reveal hints.
 
-Your answer awaits at the end.`,
+Open the golden chest to the north to finish your quest.`,
     },
     bossLocked: {
       title: 'Locked!',
-      text:  'The chest glows... but something blocks it.\nFind all 3 letters first!',
+      text:  'The chest glows... but something blocks it.\nSolve all four chest riddles first!',
     },
     finalLocked: {
       title: 'Locked!',
