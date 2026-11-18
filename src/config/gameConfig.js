@@ -246,28 +246,11 @@ Your final answer awaits!`,
 But a fairy revived you!`,
     },
     end: {
-      title:   '❤️ Final Question ❤️',
+      title: 'CROWN RECOVERED!',
       message:
-`Dear Juliette,
-
-I made this to prove to you that no matter how far I am from you I would 
-always try my best to impress you my love. 
-Je t'aime
-
-And as for the last part of the quest, something that I knew from day one 
-but couldn't express it fully. I would like to ask you... 
-
-Do you want to be my Girlfriend?`,
-      yesLabel: 'Oui! ❤️',
-      noLabel:  'Non',
-      yesTitle:  '🎉 LETSGOOO She Said YES! 🎉',
-      yesMessage:
-`I knew it! 
-
-Achievement unlocked:
-Being your boyfriend.
-
-— Sebastian 😛`,
+`Four riddles solved. The guardian defeated.
+You unlocked the final chest and recovered your crown.
+Your kingdom welcomes you home.`,
     },
   },
 };

@@ -53,43 +53,24 @@ const Screens = (() => {
     // Clear any previous buttons
     endButtons.innerHTML = '';
 
-    // ── YES button ──
-    const yesBtn = document.createElement('button');
-    yesBtn.id          = 'yes-btn';
-    yesBtn.textContent = S.end.yesLabel;
-    yesBtn.addEventListener('click', () => {
-      endTitle.textContent   = S.end.yesTitle;
-      endMessage.textContent = S.end.yesMessage;
-      endButtons.innerHTML   = '';    // remove buttons after answering
-    });
-
-    // ── NO button ──
-    // Every click moves it to a random position so it can't be pressed
-    const noBtn = document.createElement('button');
-    noCount = 0;
-    noBtn.id          = 'no-btn';
-    noBtn.textContent = S.end.noLabel;
-    noBtn.addEventListener('click', () => {
-      noCount++;
-      noBtn.style.left = (Math.random() * 260) + 'px';
-      noBtn.style.top  = (Math.random() * 80)  + 'px';
-      
-      if (noCount === 3) {
-          endMessage.textContent = "It won't be as easy as you thought...";
-      } else if (noCount === 5) {
-          endMessage.textContent = "Bruh, come on 💀";
-      } else if (noCount === 8) {
-          endMessage.textContent = "this has to be a joke lmao";
-      }
-      else if (noCount === 14) {
-          endMessage.textContent = "😭😭😭😭😭😭";
-      }
-    });
-
-    endButtons.appendChild(yesBtn);
-    endButtons.appendChild(noBtn);
+    const portrait = document.createElement('canvas');
+    portrait.width = 64;
+    portrait.height = 70;
+    portrait.setAttribute('aria-label', 'Princess wearing her recovered crown');
+    portrait.style.display = 'block';
+    portrait.style.margin = '0 auto 16px';
+    const ctx = portrait.getContext('2d');
+    ctx.scale(2, 2);
+    Sprites.drawPlayer(ctx, 0, 0, 'down', 1, false, Entities.player.hasCrown);
+    endButtons.appendChild(portrait);
+    const replayBtn = document.createElement('button');
+    replayBtn.id = 'yes-btn';
+    replayBtn.textContent = 'PLAY AGAIN';
+    replayBtn.addEventListener('click', () => window.location.reload());
+    endButtons.appendChild(replayBtn);
 
     endScreen.classList.remove('hidden');
+    replayBtn.focus();
   }
 
   /* ─── Public API ─── */
