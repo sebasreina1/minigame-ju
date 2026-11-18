@@ -254,6 +254,18 @@ const Sprites = (() => {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(px + 5,  py + 31, 22, 1);
 
+    // Puff sleeves, a pearl brooch, and shaded skirt folds.
+    ctx.fillStyle = '#ffe8f3';
+    ctx.fillRect(px + 6, py + 18, 5, 5);
+    ctx.fillRect(px + 21, py + 18, 5, 5);
+    ctx.fillRect(px + 15, py + 19, 2, 3);
+    ctx.fillStyle = '#b64c90';
+    ctx.fillRect(px + 10, py + 24, 12, 2);
+    ctx.fillRect(px + 10, py + 27, 2, 4);
+    ctx.fillRect(px + 20, py + 27, 2, 4);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(px + 13, py + 27, 2, 3);
+    ctx.fillRect(px + 17, py + 27, 2, 3);
     // ── Tiny feet peeking out from under the dress ──
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(px + 10, py + 33, 4, 2);
