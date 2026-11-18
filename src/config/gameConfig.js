@@ -49,6 +49,11 @@ const CONFIG = {
     { question: 'Water stays inside me, even though I am covered in holes. What am I?', answers: ['sponge', 'a sponge'], hints: ['Think of a cleaning tool.', 'Its tiny holes soak up liquid.'] },
   ],
 
+  FINAL_RIDDLE: {
+    question: 'I rest above a royal brow, but I am neither hair nor a hat. What am I?',
+    answers: ['crown', 'a crown', 'the crown'],
+    hints: ['A symbol of royalty.', 'The princess is searching for this golden headpiece.'],
+  },
   LETTERS: [
     {
       title: "Chest #1",

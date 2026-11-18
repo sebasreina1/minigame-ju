@@ -101,12 +101,14 @@ function checkChestInteraction() {
       if (!state.bossDefeated || state.lettersFound < CONFIG.LETTERS.length) {
         Dialog.show(CONFIG.SCREENS.finalLocked.title, CONFIG.SCREENS.finalLocked.text);
       } else {
-        ch.locked = false;
-        ch.opened = true;
-        Entities.player.hasCrown = true;
-        Renderer.drawFrame(Entities);
-        state.running = false;
-        Screens.showEndScreen();
+        Dialog.askRiddle(CONFIG.FINAL_RIDDLE, () => {
+          ch.locked = false;
+          ch.opened = true;
+          Entities.player.hasCrown = true;
+          Renderer.drawFrame(Entities);
+          state.running = false;
+          Screens.showEndScreen();
+        });
       }
       return;
     }
