@@ -75,7 +75,7 @@ const Renderer = (() => {
       const alpha = (player.hitFlash > 0 && Math.floor(player.hitFlash / 3) % 2 === 0)
                     ? 0.3 : 1;
 
-      Sprites.drawPlayer(ctx, px, py, player.dir, alpha, player.sword > 0);
+      Sprites.drawPlayer(ctx, px, py, player.dir, alpha, player.sword > 0, player.hasCrown);
     }
 
     // ── Layer 5: Particles (drawn on top of everything) ──

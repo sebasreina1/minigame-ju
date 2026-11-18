@@ -218,7 +218,7 @@ const Sprites = (() => {
   }
 
 
-  function drawPlayer(ctx, px, py, dir, alpha, swordActive) {
+  function drawPlayer(ctx, px, py, dir, alpha, swordActive, hasCrown = true) {
     ctx.globalAlpha = alpha;
 
     // ── Hair (blonde) — drawn first so head sits on top ──
@@ -232,11 +232,13 @@ const Sprites = (() => {
     ctx.fillRect(px + 10, py + 9, 12, 11);
 
     // ── Crown (small gold points on top of head) ──
-    ctx.fillStyle = '#f0d050';
-    ctx.fillRect(px + 11, py + 1, 2, 3);   // left point
-    ctx.fillRect(px + 15, py + 0, 2, 4);   // center point (tallest)
-    ctx.fillRect(px + 19, py + 1, 2, 3);   // right point
-    ctx.fillRect(px + 10, py + 4, 12, 2);  // crown base band
+    if (hasCrown) {
+      ctx.fillStyle = '#f0d050';
+      ctx.fillRect(px + 11, py + 1, 2, 3);   // left point
+      ctx.fillRect(px + 15, py + 0, 2, 4);   // center point (tallest)
+      ctx.fillRect(px + 19, py + 1, 2, 3);   // right point
+      ctx.fillRect(px + 10, py + 4, 12, 2);  // crown base band
+    }
 
     // ── Eyes ──
     ctx.fillStyle = '#333333';

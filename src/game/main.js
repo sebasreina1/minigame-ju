@@ -103,6 +103,9 @@ function checkChestInteraction() {
       } else {
         ch.locked = false;
         ch.opened = true;
+        Entities.player.hasCrown = true;
+        Renderer.drawFrame(Entities);
+        state.running = false;
         Screens.showEndScreen();
       }
       return;

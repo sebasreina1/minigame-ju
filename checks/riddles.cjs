@@ -14,6 +14,7 @@ function element() {
 }
 const sandbox = {
   console, Math, Set,
+  Renderer: { drawFrame() {} },
   document: {
     body: element(),
     getElementById(id) { if (!nodes.has(id)) nodes.set(id, element()); return nodes.get(id); },
@@ -31,6 +32,7 @@ function submit(answer) {
   nodes.get('riddle-answer').value = answer;
   nodes.get('riddle-form').listeners.submit({ preventDefault() {} });
 }
+assert.equal(run('Entities.player.hasCrown'), false, 'the quest starts without a crown');
 function approachChest(type, index = 0) {
   const chest = run(`Entities.chests.filter(chest => chest.type === '${type}')[${index}]`);
   run(`Entities.player.x = ${chest.x}; Entities.player.y = ${chest.y + 1}; checkChestInteraction();`);
@@ -90,6 +92,7 @@ assert.equal(run("Entities.chests.find(c => c.type === 'boss').locked"), false);
 run('state.bossDefeated = true');
 approachChest('final');
 assert.equal(run("Entities.chests.find(chest => chest.type === 'final').opened"), true, 'all riddles plus boss victory unlock the ending');
+assert.equal(run('Entities.player.hasCrown'), true, 'the final chest awards the crown');
 windowEvents.keydown(key('ArrowLeft'));
 assert.equal(run('Input.isMoveLeft()'), true);
 windowEvents.blur();

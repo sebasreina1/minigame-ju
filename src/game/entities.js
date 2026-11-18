@@ -15,6 +15,7 @@ const Entities = (() => {
   const player = {
     x:         CONFIG.PLAYER.startX,   // current tile column
     y:         CONFIG.PLAYER.startY,   // current tile row
+    hasCrown:  false,
     dir:       'down',                 // 'up' | 'down' | 'left' | 'right'
     hp:        CONFIG.PLAYER.maxHP,
     maxHP:     CONFIG.PLAYER.maxHP,
