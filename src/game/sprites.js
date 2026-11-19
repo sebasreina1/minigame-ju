@@ -275,50 +275,24 @@ const Sprites = (() => {
 
 
 
-    // ── Sword swing (only visible when attacking) ──
-    // ── Sword swing — always swings left to right, with a pointed tip ──
-    // ── Sword swing — only visible when facing left/right, with a pointed tip ──
-// ── Gun — only visible when facing left/right ──
+    // Bow and drawn string rotate with the princess's facing direction.
     if (swordActive) {
-      ctx.fillStyle = '#555555';   // gun barrel/body — dark grey
-
-      if (dir === 'right') {
-        // Barrel
-        ctx.fillRect(px + T - 2, py + 14, 14, 4);
-        // Grip (angled down from the back of the barrel)
-        ctx.fillRect(px + T + 2, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px + T + 1, py + 17, 2, 2);
-
-      } else if (dir === 'up') {
-        // Barrel
-        ctx.fillRect(px + T - 2, py + 14, 14, 4);
-        // Grip (angled down from the back of the barrel)
-        ctx.fillRect(px + T + 2, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px + T + 1, py + 17, 2, 2);
-
-      } else if (dir === 'down') {
-        // Barrel
-        ctx.fillRect(px - 12, py + 14, 14, 4);
-        // Grip
-        ctx.fillRect(px - 6, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px - 3, py + 17, 2, 2);
-      } else if (dir === 'left') {
-        // Barrel
-        ctx.fillRect(px - 12, py + 14, 14, 4);
-        // Grip
-        ctx.fillRect(px - 6, py + 17, 4, 7);
-        // Trigger guard accent
-        ctx.fillStyle = '#333333';
-        ctx.fillRect(px - 3, py + 17, 2, 2);
-      }
+      ctx.save();
+      ctx.translate(px + T / 2, py + T / 2);
+      ctx.rotate(({ right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 })[dir]);
+      ctx.strokeStyle = '#b8860b';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(9, 0, 10, -Math.PI / 2, Math.PI / 2);
+      ctx.stroke();
+      ctx.strokeStyle = '#fff0ce';
+      ctx.beginPath();
+      ctx.moveTo(9, -10);
+      ctx.lineTo(4, 0);
+      ctx.lineTo(9, 10);
+      ctx.stroke();
+      ctx.restore();
     }
-
     ctx.globalAlpha = 1;  // always reset alpha
   }
 
