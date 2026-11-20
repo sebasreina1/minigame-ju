@@ -218,7 +218,7 @@ const Sprites = (() => {
   }
 
 
-  function drawPlayer(ctx, px, py, dir, alpha, swordActive, hasCrown = true) {
+  function drawPlayer(ctx, px, py, dir, alpha, swordActive, hasCrown = true, aimAngle) {
     ctx.globalAlpha = alpha;
 
     // ── Hair (blonde) — drawn first so head sits on top ──
@@ -279,7 +279,7 @@ const Sprites = (() => {
     if (swordActive) {
       ctx.save();
       ctx.translate(px + T / 2, py + T / 2);
-      ctx.rotate(({ right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 })[dir]);
+      ctx.rotate(aimAngle ?? ({ right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 })[dir]);
       ctx.strokeStyle = '#b8860b';
       ctx.lineWidth = 2;
       ctx.beginPath();

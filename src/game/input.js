@@ -29,6 +29,17 @@ const Input = (() => {
   window.addEventListener('blur', () => held.clear());
   document.addEventListener('focusin', () => held.clear());
 
+  window.addEventListener('pointermove', event => {
+    if (event.target !== Renderer.canvas || Dialog.isOpen()) return;
+    const canvas = Renderer.canvas;
+    const rect = canvas.getBoundingClientRect();
+    const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height);
+    if (!scale) return;
+    const x = (event.clientX - rect.left - (rect.width - canvas.width * scale) / 2) / scale;
+    const y = (event.clientY - rect.top - (rect.height - canvas.height * scale) / 2) / scale;
+    if (x < 0 || y < 0 || x > canvas.width || y > canvas.height) return;
+    Entities.player.aimTarget = { x, y };
+  });
   /* ─── Query helpers ─── */
 
   /** True if any "move up" key is held */

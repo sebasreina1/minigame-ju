@@ -43,6 +43,9 @@ function gameLoop() {
 function updatePlayer() {
   const p   = Entities.player;
   const cfg = CONFIG.PLAYER;
+  if (p.aimTarget) {
+    p.aimAngle = Math.atan2(p.aimTarget.y - (p.y + 0.5) * CONFIG.TILE_SIZE, p.aimTarget.x - (p.x + 0.5) * CONFIG.TILE_SIZE);
+  }
   if (p.hitFlash > 0) p.hitFlash--;
   if (p.sword    > 0) p.sword--;
   state.moveTimer++;
