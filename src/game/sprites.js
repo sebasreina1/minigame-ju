@@ -156,11 +156,29 @@ const Sprites = (() => {
     const step = bobOffset > 0 ? 1 : 0;
     rect(6,28+step,9,4,ink); rect(18,29-step,9,4,ink);
     rect(7,28+step,6,2,'#698084'); rect(19,29-step,6,2,'#698084');
+    // Spiked shoulders and armored chest.
+    rect(1,13,8,6,ink); rect(24,13,8,6,ink);
+    rect(2,11,2,4,'#fff0ba'); rect(28,11,2,4,'#fff0ba');
+    rect(2,14,7,3,leaf); rect(25,14,6,3,leaf);
+    rect(7,14,18,12,ink); rect(9,14,14,11,leaf);
+    rect(10,15,4,8,'#64ae79'); rect(21,15,2,9,'#245749');
+    rect(14,16,5,6,'#eab568'); rect(15,17,3,3,'#fff0ba');
+    rect(9,24,14,2,'#eab568'); rect(15,24,3,2,ink);
+    // Gauntlets.
+    rect(2,19,6,7,ink); rect(25,19,6,7,ink);
+    rect(3,20,4,4,'#a4b6a0'); rect(26,20,4,4,'#a4b6a0');
     // Horns, brow, glowing eyes, and a toothy grin.
     rect(6,5,20,11,ink); rect(8,6,16,9,dark);
     rect(4,3,3,7,'#eab568'); rect(3,1,2,4,'#fff0ba');
     rect(25,3,3,7,'#eab568'); rect(27,1,2,4,'#fff0ba');
+    rect(9,8,6,2,'#a688b0'); rect(18,8,5,2,'#a688b0');
     rect(10,10,5,2,'#fff0ba'); rect(18,10,5,2,'#fff0ba');
+    rect(13,10,2,2,'#ef765d'); rect(18,10,2,2,'#ef765d');
+    rect(12,14,9,2,ink); rect(13,14,2,1,'#fff0ba'); rect(18,14,2,1,'#fff0ba');
+    // Three-point crown.
+    rect(10,2,13,4,ink); rect(11,1,2,4,'#eab568');
+    rect(15,0,3,5,'#fff0ba'); rect(21,1,2,4,'#eab568');
+    rect(11,4,12,2,'#eab568'); rect(16,4,2,2,'#e55d73');
   }
 
   /**
