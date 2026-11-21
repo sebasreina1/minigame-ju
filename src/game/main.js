@@ -21,6 +21,7 @@ const state = {
 function initGame() {
   state.running = true;
   HUD.show();
+  updateQuest();
   HUD.updateHP(Entities.player.hp, Entities.player.maxHP);
   requestAnimationFrame(gameLoop);
   setTimeout(() => {
@@ -127,6 +128,7 @@ function collectLetterChest(chest) {
   if (chest.opened) return;
   chest.opened = true;
   state.lettersFound++;
+  updateQuest();
   Entities.spawnParticles(chest.x, chest.y, CONFIG.COLORS.particleGold);
   const letter = CONFIG.LETTERS[chest.letterIdx];
   Dialog.show(letter.title, letter.text, () => {
@@ -194,6 +196,7 @@ function killBoss() {
   // Mark boss as dead FIRST
   b.alive = false;
   state.bossDefeated = true;
+  updateQuest();
 
   // Unlock the final chest
   const finalCh = Entities.chests.find(c => c.type === 'final');
@@ -221,5 +224,12 @@ function respawnPlayer() {
   Dialog.show(CONFIG.SCREENS.playerDied.title, CONFIG.SCREENS.playerDied.text);
 }
 
+function updateQuest() {
+  document.getElementById('quest-progress').textContent = state.bossDefeated && state.lettersFound === CONFIG.LETTERS.length
+    ? 'Solve the final riddle in the northern chest ↑'
+    : state.lettersFound === CONFIG.LETTERS.length
+      ? 'All riddles solved · Defeat the guardian!'
+      : `Riddles ${state.lettersFound} / ${CONFIG.LETTERS.length} · Explore the garden`;
+}
 // Boot
 Screens.initStartScreen(initGame);

@@ -23,8 +23,9 @@ const Renderer = (() => {
 
   canvas.width  = W;
   canvas.height = H;
-  canvas.style.width  = '100vw';
-  canvas.style.height = '100vh';
+  canvas.style.width  = 'min(94vw, 960px, calc((100dvh - 180px) * 4 / 3))';
+  canvas.style.height = 'auto';
+  ctx.imageSmoothingEnabled = false;
   canvas.style.maxWidth  = '100vw';
   canvas.style.maxHeight = '100vh';
   canvas.style.objectFit = 'contain';

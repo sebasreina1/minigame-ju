@@ -20,7 +20,9 @@
        Edit text in config/gameConfig.js → SCREENS.start
   ════════════════════════════════════════════════════════════ -->
   <div id="start-screen" class="screen">
+    <div class="cartridge-label">SEBASTIAN PRESENTS / PRINCESS QUEST</div>
     <h1 id="start-title">✦ PRINCESS QUEST ✦</h1>
+    <div class="world-label">WORLD 01 <span>THE WISHING GARDEN</span></div>
     <canvas id="title-scene" width="640" height="176" aria-label="Pixel garden with a castle and its guardian"></canvas>
     <p id="start-subtitle">Arrow keys or WASD to move · Space / Z to attack</p>
     <p id="start-hint">Solve four riddles · Defeat the guardian · Open the final chest</p>
@@ -40,8 +42,10 @@
        Styled in css/hud.css
   ════════════════════════════════════════════════════════════ -->
   <div id="hud" class="hidden">
+    <div class="hud-world">PLAYER 01 <span>WORLD 1-1</span></div>
+    <div id="quest-progress" aria-live="polite">Riddles 0 / 4</div>
     <div id="hp-bar"></div>
-    <div id="controls-hint">SPACE / Z → Attack</div>
+    <div id="controls-hint">MOVE: WASD / ARROWS · AIM: POINTER · ATTACK: SPACE / Z</div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════

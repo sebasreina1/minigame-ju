@@ -32,7 +32,8 @@ const Input = (() => {
   window.addEventListener('pointermove', event => {
     if (event.target !== Renderer.canvas || Dialog.isOpen()) return;
     const canvas = Renderer.canvas;
-    const rect = canvas.getBoundingClientRect();
+    const bounds = canvas.getBoundingClientRect();
+    const rect = { left: bounds.left + canvas.clientLeft, top: bounds.top + canvas.clientTop, width: canvas.clientWidth, height: canvas.clientHeight };
     const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height);
     if (!scale) return;
     const x = (event.clientX - rect.left - (rect.width - canvas.width * scale) / 2) / scale;
