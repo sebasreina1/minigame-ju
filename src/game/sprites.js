@@ -143,55 +143,24 @@ const Sprites = (() => {
        - Multiple small eyes
   ──────────────────────────────────────────────── */
   function drawBoss(ctx, px, py, bobOffset, flashWhite) {
-    const bw = T * 2 - 8;             // overall width
-    const bh = T * 2 - 8;             // overall height
-    const bx = px - T / 2 + 4;        // left edge
-    const by = py - T / 2 + 4 + bobOffset;  // top edge (with float animation)
-
-    const bodyColor = flashWhite ? '#ffffff' : C.bossBlue;   // spider body color
-    const legColor  = flashWhite ? '#ffffff' : '#1a1a1a';    // legs are near-black
-
-    // ── Legs (4 per side, angled lines made of thin rects) ──
-    // Each leg is drawn as two short segments to fake a "bent" leg look
-    ctx.fillStyle = legColor;
-    for (let i = 0; i < 4; i++) {
-      const legY = by + 8 + i * 9;
-      // Left legs — angle outward to the left
-      ctx.fillRect(bx - 14, legY, 14, 3);
-      ctx.fillRect(bx - 18, legY - 4, 6, 3);
-      // Right legs — angle outward to the right
-      ctx.fillRect(bx + bw,      legY, 14, 3);
-      ctx.fillRect(bx + bw + 12, legY - 4, 6, 3);
-    }
-
-    // ── Body (abdomen) — round-ish shape using stacked rows of varying width ──
-    ctx.fillStyle = bodyColor;
-    ctx.fillRect(bx + 6,  by,      bw - 12, 6);    // top (narrow)
-    ctx.fillRect(bx + 2,  by + 6,  bw - 4,  bh - 16); // middle (wide)
-    ctx.fillRect(bx + 6,  by + bh - 10, bw - 12, 10);  // bottom (narrow)
-
-    // Body outline
-    // Body outline — traces the tapered shape instead of one big rectangle
-    ctx.strokeStyle = C.bossOutline;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(bx + 6, by,           bw - 12, 6);          // top section outline
-    ctx.strokeRect(bx + 2, by + 6,       bw - 4,  bh - 16);     // middle section outline
-    ctx.strokeRect(bx + 6, by + bh - 10, bw - 12, 10);          // bottom section outline
-
-    // ── Red hourglass marking on the abdomen ──
-    ctx.fillStyle = flashWhite ? '#ffffff' : C.bossRed;
-    const midX = bx + bw / 2;
-    const midY = by + bh / 2;
-    ctx.fillRect(midX - 1, midY - 10, 2, 6);    // top triangle (simplified as a line)
-    ctx.fillRect(midX - 4, midY - 4,  8, 3);    // hourglass pinch point
-    ctx.fillRect(midX - 1, midY + 4,  2, 6);    // bottom triangle
-
-    // ── Eyes (several small dots near the top, spiders have many eyes) ──
-    ctx.fillStyle = C.bossEye;
-    ctx.fillRect(bx + bw / 2 - 8, by + 4, 3, 3);
-    ctx.fillRect(bx + bw / 2 - 3, by + 2, 4, 4);   // slightly bigger center eyes
-    ctx.fillRect(bx + bw / 2 + 2, by + 2, 4, 4);
-    ctx.fillRect(bx + bw / 2 + 7, by + 4, 3, 3);
+    const x = Math.round(px - 16), y = Math.round(py - 26 + bobOffset);
+    const ink = '#171b32', dark = '#3c3159', leaf = '#397b61';
+    const rect = (dx, dy, w, h, color) => {
+      ctx.fillStyle = flashWhite ? '#fff1cf' : color;
+      ctx.fillRect(x + dx * 2, y + dy * 2, w * 2, h * 2);
+    };
+    // Ground shadow, cape, and alternating heavy boots.
+    ctx.fillStyle = '#243944'; ctx.fillRect(x + 2, py + 29, 62, 6);
+    rect(5,12,22,18,ink); rect(7,14,18,15,'#8b3c64');
+    rect(8,16,3,12,'#bf5675'); rect(22,16,3,12,'#582d51');
+    const step = bobOffset > 0 ? 1 : 0;
+    rect(6,28+step,9,4,ink); rect(18,29-step,9,4,ink);
+    rect(7,28+step,6,2,'#698084'); rect(19,29-step,6,2,'#698084');
+    // Horns, brow, glowing eyes, and a toothy grin.
+    rect(6,5,20,11,ink); rect(8,6,16,9,dark);
+    rect(4,3,3,7,'#eab568'); rect(3,1,2,4,'#fff0ba');
+    rect(25,3,3,7,'#eab568'); rect(27,1,2,4,'#fff0ba');
+    rect(10,10,5,2,'#fff0ba'); rect(18,10,5,2,'#fff0ba');
   }
 
   /**
