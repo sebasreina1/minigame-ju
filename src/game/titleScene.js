@@ -15,4 +15,21 @@
     block(x,140-h,90,h,'#293e50'); block(x+12,128-h,66,12,'#293e50');
     block(x+25,116-h,40,12,'#293e50');
   }
+  // Small castle with battlements, brickwork and a heart flag.
+  block(401,62,66,78,'#665f7d');
+  for(const x of [388,450]) {
+    block(x,48,30,92,'#8a7f98');
+    for(let k=0;k<3;k++) block(x+k*12,40,6,10,'#b7a4b0');
+    block(x+10,68,8,17,'#242d48');
+  }
+  for(let y=86;y<138;y+=14) for(let x=404;x<468;x+=20) block(x+(y%28?0:8),y,12,2,'#a999aa');
+  block(424,112,18,28,'#242d48'); block(428,106,10,6,'#242d48');
+  block(434,13,3,46,'#e8c58c'); block(437,16,24,16,'#d96887');
+  block(443,20,4,4,'#fff0ce'); block(451,20,4,4,'#fff0ce'); block(447,24,4,4,'#fff0ce');
+  for(let x=0;x<640;x+=32) { Sprites.drawWall(ctx,x,144); block(x,140,32,4,'#b7cb82'); }
+  for(const x of [16,80,540,590]) Sprites.drawTree(ctx,x,112,false);
+  Sprites.drawPlayer(ctx,134,108,'right',1,false,false);
+  Sprites.drawLetterChest(ctx,199,104,false);
+  Sprites.drawLetterChest(ctx,252,104,false);
+  Sprites.drawBoss(ctx,340,110,0,false);
 })();
