@@ -145,17 +145,17 @@ this possible, to live together and have a life that we can both be proud of. Th
   ──────────────────────────────────────────────── */
   COLORS: {
     /* Map tiles */
-    grass:        '#5a8a3a',
-    grassAlt:     '#4a7a2a',
-    path:         '#c8a85a',
-    pathAlt:      '#b8984a',
-    wall:         '#6a5a4a',
-    wallShadow:   '#5a4a3a',
-    water:        '#3a6aaa',
-    waterShine:   '#4a7abb',
+    grass:        '#42665c',
+    grassAlt:     '#3c6055',
+    path:         '#bb9c7b',
+    pathAlt:      '#ad8e70',
+    wall:         '#58516b',
+    wallShadow:   '#423d56',
+    water:        '#465b89',
+    waterShine:   '#708bb2',
     treeTrunk:    '#6a4a2a',
-    treeLeaves:   '#2a6a2a',
-    treeTop:      '#3a8a3a',
+    treeLeaves:   '#294e4f',
+    treeTop:      '#3b7063',
 
     /* Chest */
     chestLid:     '#c8a030',
