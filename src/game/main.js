@@ -39,6 +39,15 @@ function gameLoop() {
       arrow.x += arrow.vx;
       arrow.y += arrow.vy;
       arrow.life--;
+      const b = Entities.boss;
+      if (GameMap.isTileSolid(Math.floor(arrow.x), Math.floor(arrow.y))) arrow.life = 0;
+      if (arrow.life > 0 && b.alive && Math.hypot(arrow.x - b.x - 0.5, arrow.y - b.y - 0.5) < 0.6) {
+        b.hp--;
+        b.hitFlash = CONFIG.BOSS.hitFlashDuration;
+        arrow.life = 0;
+        Entities.spawnParticles(b.x, b.y, CONFIG.COLORS.particleRed);
+        if (b.hp <= 0) killBoss();
+      }
     }
     Entities.arrows = Entities.arrows.filter(arrow => arrow.life > 0 && !GameMap.isTileSolid(Math.floor(arrow.x), Math.floor(arrow.y)));
   }
@@ -62,7 +71,6 @@ function updatePlayer() {
   }
   if (Input.isAttack() && p.sword === 0) {
     p.sword = cfg.swordDuration;
-    tryAttackBoss();
     const angle = p.aimAngle ?? ({ right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 })[p.dir];
     Entities.arrows.push({ x: p.x + 0.5, y: p.y + 0.5, vx: Math.cos(angle) * 0.25, vy: Math.sin(angle) * 0.25, life: 48 });
   }
@@ -183,22 +191,8 @@ function moveBossTowardPlayer() {
   }
 }
 
-function tryAttackBoss() {
-  const b   = Entities.boss;
-  const p   = Entities.player;
-  const cfg = CONFIG.BOSS;
-  if (!b.alive) return;
-  const dx = Math.abs(p.x - b.x);
-  const dy = Math.abs(p.y - b.y);
-  if (dx <= cfg.attackRange && dy <= cfg.attackRange) {
-    b.hp--;
-    b.hitFlash = cfg.hitFlashDuration;
-    Entities.spawnParticles(b.x, b.y, CONFIG.COLORS.particleRed);
-    if (b.hp <= 0) killBoss();
-  }
-}
-
 function killBoss() {
+  Entities.arrows = [];
   const b = Entities.boss;
 
   // Mark boss as dead FIRST
@@ -223,6 +217,7 @@ function killBoss() {
 }
 
 function respawnPlayer() {
+  Entities.arrows = [];
   const p   = Entities.player;
   const cfg = CONFIG.PLAYER;
   p.hp = cfg.respawnHP;
