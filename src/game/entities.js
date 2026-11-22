@@ -98,6 +98,7 @@ const Entities = (() => {
 
   /* ─── Public API ─── */
   return {
+    arrows: [],
     player,
     boss,
     chests,

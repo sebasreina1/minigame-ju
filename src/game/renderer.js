@@ -80,6 +80,13 @@ const Renderer = (() => {
       Sprites.drawPlayer(ctx, px, py, player.dir, alpha, player.sword > 0 || Number.isFinite(player.aimAngle), player.hasCrown, player.aimAngle);
     }
 
+    ctx.strokeStyle = '#fff0ce';
+    for (const arrow of entities.arrows) {
+      ctx.beginPath();
+      ctx.moveTo(arrow.x * T, arrow.y * T);
+      ctx.lineTo((arrow.x - arrow.vx) * T, (arrow.y - arrow.vy) * T);
+      ctx.stroke();
+    }
     // ── Layer 5: Particles (drawn on top of everything) ──
     for (const p of particles) {
       Sprites.drawParticle(ctx, p);

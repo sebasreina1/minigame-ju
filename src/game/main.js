@@ -35,6 +35,12 @@ function gameLoop() {
   if (!Dialog.isOpen()) {
     updatePlayer();
     updateBoss();
+    for (const arrow of Entities.arrows) {
+      arrow.x += arrow.vx;
+      arrow.y += arrow.vy;
+      arrow.life--;
+    }
+    Entities.arrows = Entities.arrows.filter(arrow => arrow.life > 0 && !GameMap.isTileSolid(Math.floor(arrow.x), Math.floor(arrow.y)));
   }
   Entities.updateParticles();
   Renderer.drawFrame(Entities);
@@ -57,6 +63,8 @@ function updatePlayer() {
   if (Input.isAttack() && p.sword === 0) {
     p.sword = cfg.swordDuration;
     tryAttackBoss();
+    const angle = p.aimAngle ?? ({ right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 })[p.dir];
+    Entities.arrows.push({ x: p.x + 0.5, y: p.y + 0.5, vx: Math.cos(angle) * 0.25, vy: Math.sin(angle) * 0.25, life: 48 });
   }
 }
 
