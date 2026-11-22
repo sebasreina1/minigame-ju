@@ -207,7 +207,7 @@ this possible, to live together and have a life that we can both be proud of. Th
   SCREENS: {
     start: {
       title:    '✦ PRINCESS QUEST ✦',
-      subtitle: 'Arrow keys or WASD to move · Space / Z to attack',
+      subtitle: 'WASD / arrows to move · Aim and hold pointer to attack',
       hint:     'Solve four riddles · Defeat the guardian · Open the final chest',
       button:   'START',
     },
@@ -215,7 +215,7 @@ this possible, to live together and have a life that we can both be proud of. Th
       title: 'How to play',
       text:
 `Arrow keys / WASD → Move
-Space / Z → Attack
+Hold pointer / Space / Z → Attack
 
 Four riddles guard your path.
 Solve the chest riddles in order, then defeat the guardian.

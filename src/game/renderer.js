@@ -26,6 +26,7 @@ const Renderer = (() => {
   canvas.style.width  = 'min(94vw, 960px, calc((100dvh - 180px) * 4 / 3))';
   canvas.style.height = 'auto';
   ctx.imageSmoothingEnabled = false;
+  canvas.style.touchAction = 'none';
   canvas.style.maxWidth  = '100vw';
   canvas.style.maxHeight = '100vh';
   canvas.style.objectFit = 'contain';

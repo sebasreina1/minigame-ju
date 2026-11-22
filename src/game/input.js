@@ -29,7 +29,7 @@ const Input = (() => {
   window.addEventListener('blur', () => held.clear());
   document.addEventListener('focusin', () => held.clear());
 
-  window.addEventListener('pointermove', event => {
+  function aimPointer(event) {
     if (event.target !== Renderer.canvas || Dialog.isOpen()) return;
     const canvas = Renderer.canvas;
     const bounds = canvas.getBoundingClientRect();
@@ -40,7 +40,18 @@ const Input = (() => {
     const y = (event.clientY - rect.top - (rect.height - canvas.height * scale) / 2) / scale;
     if (x < 0 || y < 0 || x > canvas.width || y > canvas.height) return;
     Entities.player.aimTarget = { x, y };
+    return true;
+  }
+  window.addEventListener('pointermove', aimPointer);
+  window.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || !aimPointer(event)) return;
+    event.preventDefault();
+    Renderer.canvas.setPointerCapture(event.pointerId);
+    held.add('pointer');
   });
+  window.addEventListener('pointerup', () => held.delete('pointer'));
+  window.addEventListener('pointercancel', () => held.delete('pointer'));
+  window.addEventListener('lostpointercapture', () => held.delete('pointer'));
   /* ─── Query helpers ─── */
 
   /** True if any "move up" key is held */
@@ -56,7 +67,7 @@ const Input = (() => {
   function isMoveRight() { return held.has('ArrowRight') || held.has('d') || held.has('D'); }
 
   /** True if any "attack" key is held (Space or Z) */
-  function isAttack()    { return held.has(' ') || held.has('z') || held.has('Z'); }
+  function isAttack()    { return held.has('pointer') || held.has(' ') || held.has('z') || held.has('Z'); }
 
   /* ─── Public API ─── */
   return {
