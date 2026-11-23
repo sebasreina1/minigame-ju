@@ -11,6 +11,7 @@
 const Input = (() => {
   // Set of currently held keys (key string → true)
   const held = new Set();
+  let attackPointer = null;
 
   // Listen on the window so the canvas doesn't need focus
   window.addEventListener('keydown', (e) => {
@@ -26,8 +27,8 @@ const Input = (() => {
     held.delete(e.key);
   });
 
-  window.addEventListener('blur', () => held.clear());
-  document.addEventListener('focusin', () => held.clear());
+  window.addEventListener('blur', () => { held.clear(); attackPointer = null; });
+  document.addEventListener('focusin', () => { held.clear(); attackPointer = null; });
 
   document.querySelectorAll('[data-key]').forEach(button => {
     button.addEventListener('pointerdown', event => {
@@ -53,14 +54,18 @@ const Input = (() => {
   }
   window.addEventListener('pointermove', aimPointer);
   window.addEventListener('pointerdown', event => {
-    if (event.button !== 0 || !aimPointer(event)) return;
+    if (attackPointer !== null || event.button !== 0 || !aimPointer(event)) return;
     event.preventDefault();
     Renderer.canvas.setPointerCapture(event.pointerId);
+    attackPointer = event.pointerId;
     held.add('pointer');
   });
-  window.addEventListener('pointerup', () => held.delete('pointer'));
-  window.addEventListener('pointercancel', () => held.delete('pointer'));
-  window.addEventListener('lostpointercapture', () => held.delete('pointer'));
+  function releaseAttack(event) {
+    if (event.pointerId !== attackPointer) return;
+    held.delete('pointer');
+    attackPointer = null;
+  }
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) window.addEventListener(type, releaseAttack);
   /* ─── Query helpers ─── */
 
   /** True if any "move up" key is held */
