@@ -29,6 +29,15 @@ const Input = (() => {
   window.addEventListener('blur', () => held.clear());
   document.addEventListener('focusin', () => held.clear());
 
+  document.querySelectorAll('[data-key]').forEach(button => {
+    button.addEventListener('pointerdown', event => {
+      if (Dialog.isOpen()) return;
+      event.preventDefault();
+      button.setPointerCapture(event.pointerId);
+      held.add(button.dataset.key);
+    });
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(type, () => held.delete(button.dataset.key));
+  });
   function aimPointer(event) {
     if (event.target !== Renderer.canvas || Dialog.isOpen()) return;
     const canvas = Renderer.canvas;

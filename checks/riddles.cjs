@@ -17,6 +17,7 @@ const sandbox = {
   Renderer: { drawFrame() {} },
   document: {
     body: element(),
+    querySelectorAll() { return []; },
     getElementById(id) { if (!nodes.has(id)) nodes.set(id, element()); return nodes.get(id); },
     addEventListener(event, callback) { documentEvents[event] = callback; },
   },

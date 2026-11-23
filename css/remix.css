@@ -37,3 +37,4 @@ button:focus-visible { outline:3px solid #e98ca3; outline-offset:6px; }
 @media(max-width:500px) { .screen { gap:16px; } .cartridge-label { font-size:6px; } .world-label { font-size:7px; gap:14px; } #hud { padding:8px; } #controls-hint { font-size:6px; } #dialog-box { font-size:9px; padding:16px; } }
 @media(max-height:650px) { .screen { gap:10px; padding:18px; justify-content:safe center; } #title-scene { max-height:120px; width:auto; max-width:90vw; } #start-title { font-size:26px; } #hud { top:4px; } }
 @media(prefers-reduced-motion:reduce) { button { transform:none!important; } }
+#touch-controls span { font:8px/2 var(--font-game); color:#fff0ce; text-align:right; }
