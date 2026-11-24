@@ -25,7 +25,7 @@ const sandbox = {
   HUD: { updateHP() {}, show() {} }, Screens: { initStartScreen() {}, showEndScreen() {} },
 };
 vm.createContext(sandbox);
-for (const file of ['src/config/gameConfig.js', 'src/game/dialog.js', 'src/game/entities.js', 'src/game/input.js', 'src/game/main.js']) {
+for (const file of ['src/config/gameConfig.js', 'src/game/dialog.js', 'src/game/entities.js', 'src/game/map.js', 'src/game/input.js', 'src/game/main.js']) {
   vm.runInContext(fs.readFileSync(file, 'utf8'), sandbox, { filename: file });
 }
 function run(code) { return vm.runInContext(code, sandbox); }
@@ -34,6 +34,8 @@ function submit(answer) {
   nodes.get('riddle-form').listeners.submit({ preventDefault() {} });
 }
 assert.equal(run('Entities.player.hasCrown'), false, 'the quest starts without a crown');
+assert.equal(run('Entities.boss.alive'), false, 'guardian sleeps until the riddles are solved');
+run('Entities.player.hp = 1');
 function approachChest(type, index = 0) {
   const chest = run(`Entities.chests.filter(chest => chest.type === '${type}')[${index}]`);
   run(`Entities.player.x = ${chest.x}; Entities.player.y = ${chest.y + 1}; checkChestInteraction();`);
@@ -89,6 +91,10 @@ for (const [index, answer] of [[1, 'towel'], [2, 'a map'], [3, 'sponge']]) {
   run('Dialog.close()');
 }
 assert.equal(run('state.lettersFound'), 4);
+assert.equal(run('Entities.boss.alive'), true, 'four solved riddles awaken the guardian');
+assert.equal(run('Entities.player.hp'), run('Entities.player.maxHP'), 'combat starts with restored health');
+run('Entities.boss.x = 4; Entities.boss.y = 1; Entities.player.x = 6; Entities.player.y = 1; moveBossTowardPlayer()');
+assert.equal(run('Entities.boss.x'), 4, 'guardian cannot step into a tree that blocks arrows');
 assert.equal(run("Entities.chests.find(c => c.type === 'boss').locked"), false);
 run('state.bossDefeated = true');
 approachChest('final');

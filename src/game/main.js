@@ -151,6 +151,10 @@ function collectLetterChest(chest) {
     if (state.lettersFound >= CONFIG.LETTERS.length) {
       const bossCh = Entities.chests.find(c => c.type === 'boss');
       if (bossCh) bossCh.locked = false;
+      Entities.arrows = [];
+      Entities.boss.alive = true;
+      Entities.player.hp = Entities.player.maxHP;
+      HUD.updateHP(Entities.player.hp, Entities.player.maxHP);
     }
   });
 }
@@ -185,7 +189,7 @@ function moveBossTowardPlayer() {
   let nx = b.x, ny = b.y;
   if (Math.abs(dx) >= Math.abs(dy)) nx += Math.sign(dx);
   else                               ny += Math.sign(dy);
-  if (nx >= 1 && nx < CONFIG.COLS - 1 && ny >= 1 && ny < CONFIG.ROWS - 1) {
+  if (!GameMap.isSolid(nx, ny, Entities.chests)) {
     b.x = nx;
     b.y = ny;
   }
