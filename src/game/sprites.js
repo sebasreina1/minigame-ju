@@ -101,10 +101,15 @@ const Sprites = (() => {
   }
 
   /**
-   * Final (golden proposal) chest.
-   * Grey and locked until boss is defeated, then gold.
+   * Large crown chest, centered above its interaction tile.
+   * Grey until the quest unlocks it, then gold.
    */
   function drawFinalChest(ctx, px, py, locked) {
+    ctx.save();
+    ctx.translate(px + T / 2, py + T);
+    ctx.scale(1.5, 1.5);
+    px = -T / 2;
+    py = -T;
     if (locked) {
       // Greyed out — not yet accessible
       ctx.fillStyle = '#888888';
@@ -122,11 +127,16 @@ const Sprites = (() => {
       ctx.fillRect(px + 4, py + 10, T - 8, T - 14);
       ctx.fillStyle = '#ffe040';     // brighter gold for the special chest
       ctx.fillRect(px + 4, py + 8, T - 8, 10);
+      ctx.fillStyle = C.chestLock;
+      ctx.fillRect(px + 7, py + 10, 3, T - 14);
+      ctx.fillRect(px + T - 10, py + 10, 3, T - 14);
+      ctx.fillRect(px + 13, py + 16, 6, 5);
       // Sparkle effect (simple cross)
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(px + T / 2 - 1, py + 2, 2, 6);
       ctx.fillRect(px + T / 2 - 3, py + 4, 6, 2);
     }
+    ctx.restore();
   }
 
   /* ─────────────────────────────────────────────
