@@ -95,6 +95,11 @@ assert.equal(run('Entities.boss.alive'), true, 'four solved riddles awaken the g
 assert.equal(run('Entities.player.hp'), run('Entities.player.maxHP'), 'combat starts with restored health');
 run('Entities.boss.x = 4; Entities.boss.y = 1; Entities.player.x = 6; Entities.player.y = 1; moveBossTowardPlayer()');
 assert.equal(run('Entities.boss.x'), 4, 'guardian cannot step into a tree that blocks arrows');
+for (let step = 0; step < 6; step++) {
+  run('moveBossTowardPlayer()');
+  assert.equal(run('GameMap.isSolid(Entities.boss.x, Entities.boss.y, Entities.chests)'), false);
+}
+assert.equal(run('Entities.boss.x === Entities.player.x && Entities.boss.y === Entities.player.y'), true, 'guardian routes around the tree instead of getting stuck');
 assert.equal(run("Entities.chests.find(c => c.type === 'boss').locked"), false);
 run('state.bossDefeated = true');
 approachChest('final');

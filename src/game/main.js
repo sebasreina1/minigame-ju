@@ -184,14 +184,21 @@ function updateBoss() {
 function moveBossTowardPlayer() {
   const b  = Entities.boss;
   const p  = Entities.player;
-  const dx = p.x - b.x;
-  const dy = p.y - b.y;
-  let nx = b.x, ny = b.y;
-  if (Math.abs(dx) >= Math.abs(dy)) nx += Math.sign(dx);
-  else                               ny += Math.sign(dy);
-  if (!GameMap.isSolid(nx, ny, Entities.chests)) {
-    b.x = nx;
-    b.y = ny;
+  const queue = [{ x: b.x, y: b.y, first: null }];
+  const visited = new Set([`${b.x},${b.y}`]);
+  for (let i = 0; i < queue.length; i++) {
+    const current = queue[i];
+    if (current.x === p.x && current.y === p.y) {
+      if (current.first) Object.assign(b, current.first);
+      return;
+    }
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const x = current.x + dx, y = current.y + dy;
+      const key = `${x},${y}`;
+      if (visited.has(key) || GameMap.isSolid(x, y, Entities.chests)) continue;
+      visited.add(key);
+      queue.push({ x, y, first: current.first || { x, y } });
+    }
   }
 }
 
