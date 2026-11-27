@@ -95,6 +95,16 @@ const Dialog = (() => {
     solved();
   });
 
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Tab' || !isOpen()) return;
+    const controls = riddle ? [answer, form.querySelector('button')] : [btn];
+    const first = controls[0], last = controls[controls.length - 1];
+    if (!controls.includes(document.activeElement) || (event.shiftKey ? document.activeElement === first : document.activeElement === last)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    }
+  });
+
   // Wire up the "Continue" button
   btn.addEventListener('click', close);
 

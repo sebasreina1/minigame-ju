@@ -9,7 +9,8 @@ function element() {
   return { value: '', textContent: '', style: {}, listeners: {},
     classList: { add: c => classes.add(c), remove: c => classes.delete(c), contains: c => classes.has(c) },
     addEventListener(event, callback) { this.listeners[event] = callback; },
-    focus() { documentEvents.focusin?.(); },
+    focus() { sandbox.document.activeElement = this; documentEvents.focusin?.(); },
+    querySelector() { return sandbox.document.getElementById('riddle-submit'); },
   };
 }
 const sandbox = {
@@ -54,6 +55,11 @@ assert.equal(run('Input.isMoveUp()'), true);
 approachChest('letter');
 assert.equal(run('Input.isMoveUp()'), false, 'opening a dialog must release movement');
 assert.equal(run('state.lettersFound'), 0, 'opening a puzzle must not award progress');
+const submitButton = nodes.get('riddle-form').querySelector('button');
+documentEvents.keydown?.({ key: 'Tab', shiftKey: true, preventDefault() {} });
+assert.equal(sandbox.document.activeElement, submitButton, 'Shift+Tab wraps to submit inside the riddle');
+documentEvents.keydown?.({ key: 'Tab', shiftKey: false, preventDefault() {} });
+assert.equal(sandbox.document.activeElement, nodes.get('riddle-answer'), 'Tab wraps back to the answer');
 run('Dialog.close()');
 assert.equal(run('Dialog.isOpen()'), true, 'cannot bypass the riddle with Continue');
 submit('wrong');
